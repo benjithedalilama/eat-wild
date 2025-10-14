@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <style>
+    .pixel { shape-rendering: crispEdges; }
+  </style>
+
+  <!-- Background -->
+  <rect width="32" height="32" fill="transparent"/>
+
+  <!-- Pixelated sea urchin body -->
+  <!-- Center core -->
+  <rect x="12" y="12" width="8" height="8" fill="#8B4789" class="pixel"/>
+
+  <!-- Inner ring -->
+  <rect x="10" y="10" width="2" height="2" fill="#A855A8" class="pixel"/>
+  <rect x="20" y="10" width="2" height="2" fill="#A855A8" class="pixel"/>
+  <rect x="10" y="20" width="2" height="2" fill="#A855A8" class="pixel"/>
+  <rect x="20" y="20" width="2" height="2" fill="#A855A8" class="pixel"/>
+
+  <!-- Spines pointing outward (8 directions) -->
+  <!-- Top -->
+  <rect x="14" y="6" width="4" height="2" fill="#B565B5" class="pixel"/>
+  <rect x="15" y="4" width="2" height="2" fill="#C485C4" class="pixel"/>
+  <rect x="15" y="2" width="2" height="2" fill="#D4A5D4" class="pixel"/>
+
+  <!-- Bottom -->
+  <rect x="14" y="24" width="4" height="2" fill="#B565B5" class="pixel"/>
+  <rect x="15" y="26" width="2" height="2" fill="#C485C4" class="pixel"/>
+  <rect x="15" y="28" width="2" height="2" fill="#D4A5D4" class="pixel"/>
+
+  <!-- Left -->
+  <rect x="6" y="14" width="2" height="4" fill="#B565B5" class="pixel"/>
+  <rect x="4" y="15" width="2" height="2" fill="#C485C4" class="pixel"/>
+  <rect x="2" y="15" width="2" height="2" fill="#D4A5D4" class="pixel"/>
+
+  <!-- Right -->
+  <rect x="24" y="14" width="2" height="4" fill="#B565B5" class="pixel"/>
+  <rect x="26" y="15" width="2" height="2" fill="#C485C4" class="pixel"/>
+  <rect x="28" y="15" width="2" height="2" fill="#D4A5D4" class="pixel"/>
+
+  <!-- Top-right diagonal -->
+  <rect x="22" y="8" width="2" height="2" fill="#B565B5" class="pixel"/>
+  <rect x="24" y="6" width="2" height="2" fill="#C485C4" class="pixel"/>
+  <rect x="26" y="4" width="2" height="2" fill="#D4A5D4" class="pixel"/>
+
+  <!-- Top-left diagonal -->
+  <rect x="8" y="8" width="2" height="2" fill="#B565B5" class="pixel"/>
+  <rect x="6" y="6" width="2" height="2" fill="#C485C4" class="pixel"/>
+  <rect x="4" y="4" width="2" height="2" fill="#D4A5D4" class="pixel"/>
+
+  <!-- Bottom-right diagonal -->
+  <rect x="22" y="22" width="2" height="2" fill="#B565B5" class="pixel"/>
+  <rect x="24" y="24" width="2" height="2" fill="#C485C4" class="pixel"/>
+  <rect x="26" y="26" width="2" height="2" fill="#D4A5D4" class="pixel"/>
+
+  <!-- Bottom-left diagonal -->
+  <rect x="8" y="22" width="2" height="2" fill="#B565B5" class="pixel"/>
+  <rect x="6" y="24" width="2" height="2" fill="#C485C4" class="pixel"/>
+  <rect x="4" y="26" width="2" height="2" fill="#D4A5D4" class="pixel"/>
+
+  <!-- Additional detail pixels -->
+  <rect x="14" y="14" width="2" height="2" fill="#6B3669" class="pixel"/>
+  <rect x="16" y="16" width="2" height="2" fill="#6B3669" class="pixel"/>
+</svg>
