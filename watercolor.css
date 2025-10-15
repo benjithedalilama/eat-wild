@@ -1,5 +1,5 @@
-/* Watercolor animation layer */
-.watercolor-layer {
+/* Watercolor animation container */
+.watercolor-canvas {
     position: fixed;
     top: 0;
     left: 0;
@@ -7,235 +7,131 @@
     height: 100vh;
     pointer-events: none;
     z-index: 0;
-    opacity: 0.6;
+    opacity: 0.7;
 }
 
-/* Sea urchin watercolor scene */
-.watercolor-scene {
-    position: absolute;
+/* SVG watercolor styling */
+.watercolor-svg {
     width: 100%;
     height: 100%;
 }
 
-/* Progressive reveal animation */
-.watercolor-reveal {
-    animation: revealPaint 15s ease-out forwards;
-    clip-path: circle(0% at 50% 50%);
+/* Kelp frond main stem */
+.kelp-stem {
+    fill: none;
+    stroke: #4a6e3c;
+    stroke-width: 8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: url(#watercolor-texture);
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: paintStroke 3s ease-out forwards;
 }
 
-@keyframes revealPaint {
-    0% { clip-path: circle(0% at 50% 50%); }
-    100% { clip-path: circle(100% at 50% 50%); }
+/* Kelp frond blade - left side */
+.kelp-blade-left {
+    fill: #5a7e4a;
+    stroke: #4a6e3c;
+    stroke-width: 2;
+    opacity: 0;
+    filter: url(#watercolor-texture);
+    animation: fadeInBlot 0.8s ease-out forwards;
 }
 
-/* Sea urchin body */
-.urchin-body {
-    position: absolute;
-    left: calc(50% - 80px);
-    top: calc(50% - 80px);
-    width: 160px;
-    height: 160px;
-    border-radius: 50%;
-    background:
-        radial-gradient(circle at 35% 35%,
-            rgba(138, 87, 142, 0.3) 0%,
-            rgba(95, 58, 100, 0.4) 40%,
-            rgba(68, 42, 73, 0.5) 70%,
-            rgba(58, 35, 63, 0.55) 100%);
-    filter: blur(2px);
-    box-shadow:
-        inset -10px -10px 30px rgba(48, 30, 53, 0.3),
-        inset 10px 10px 30px rgba(158, 107, 162, 0.2);
+/* Kelp frond blade - right side */
+.kelp-blade-right {
+    fill: #5a7e4a;
+    stroke: #4a6e3c;
+    stroke-width: 2;
+    opacity: 0;
+    filter: url(#watercolor-texture);
+    animation: fadeInBlot 0.8s ease-out forwards;
 }
 
-/* Urchin spines */
-.urchin-spine {
-    position: absolute;
-    left: calc(50% - 2px);
-    top: calc(50% - 2px);
-    width: 4px;
-    height: 70px;
-    background: linear-gradient(to bottom,
-        rgba(68, 42, 73, 0.7) 0%,
-        rgba(68, 42, 73, 0.5) 50%,
-        rgba(68, 42, 73, 0.1) 100%);
-    transform-origin: 2px 2px;
-    filter: blur(1px);
+/* Color variation blots */
+.color-blot {
+    fill: #6a8e5a;
+    opacity: 0;
+    filter: url(#watercolor-bleed);
+    animation: blotAppear 1s ease-out forwards;
 }
 
-.spine-1 { transform: rotate(0deg); }
-.spine-2 { transform: rotate(15deg); }
-.spine-3 { transform: rotate(30deg); }
-.spine-4 { transform: rotate(45deg); }
-.spine-5 { transform: rotate(60deg); }
-.spine-6 { transform: rotate(75deg); }
-.spine-7 { transform: rotate(90deg); }
-.spine-8 { transform: rotate(105deg); }
-.spine-9 { transform: rotate(120deg); }
-.spine-10 { transform: rotate(135deg); }
-.spine-11 { transform: rotate(150deg); }
-.spine-12 { transform: rotate(165deg); }
-.spine-13 { transform: rotate(180deg); }
-.spine-14 { transform: rotate(195deg); }
-.spine-15 { transform: rotate(210deg); }
-.spine-16 { transform: rotate(225deg); }
-.spine-17 { transform: rotate(240deg); }
-.spine-18 { transform: rotate(255deg); }
-.spine-19 { transform: rotate(270deg); }
-.spine-20 { transform: rotate(285deg); }
-.spine-21 { transform: rotate(300deg); }
-.spine-22 { transform: rotate(315deg); }
-.spine-23 { transform: rotate(330deg); }
-.spine-24 { transform: rotate(345deg); }
-
-/* Kelp strands */
-.kelp-strand {
-    position: absolute;
-    bottom: 20%;
-    width: 50px;
-    background: linear-gradient(to top,
-        rgba(58, 82, 45, 0.6) 0%,
-        rgba(68, 92, 52, 0.55) 40%,
-        rgba(78, 102, 62, 0.5) 70%,
-        rgba(88, 112, 70, 0.4) 100%);
-    border-radius: 25px;
-    filter: blur(3px);
-    box-shadow:
-        inset -5px 0 15px rgba(48, 72, 38, 0.4),
-        inset 5px 0 15px rgba(98, 122, 82, 0.3);
+.color-blot-dark {
+    fill: #3a5e2c;
+    opacity: 0;
+    filter: url(#watercolor-bleed);
+    animation: blotAppear 1s ease-out forwards;
 }
 
-.kelp-1 {
-    left: 25%;
-    height: 45%;
-    animation: kelpSway1 4s ease-in-out infinite;
+/* Highlight blots for wet watercolor effect */
+.highlight-blot {
+    fill: #7a9e6a;
+    opacity: 0;
+    filter: url(#watercolor-bleed);
+    animation: blotAppear 0.8s ease-out forwards;
 }
 
-.kelp-2 {
-    left: 35%;
-    height: 52%;
-    width: 45px;
-    animation: kelpSway2 5s ease-in-out infinite;
+/* Progressive painting animations */
+@keyframes paintStroke {
+    to {
+        stroke-dashoffset: 0;
+    }
 }
 
-.kelp-3 {
-    right: 30%;
-    height: 48%;
-    width: 55px;
-    animation: kelpSway3 4.5s ease-in-out infinite;
+@keyframes fadeInBlot {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.05);
+    }
+    100% {
+        opacity: 0.85;
+        transform: scale(1);
+    }
 }
 
-@keyframes kelpSway1 {
-    0%, 100% { transform: translateX(0) rotate(0deg); }
-    50% { transform: translateX(8px) rotate(3deg); }
+@keyframes blotAppear {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    60% {
+        opacity: 0.7;
+        transform: scale(1.1);
+    }
+    100% {
+        opacity: 0.6;
+        transform: scale(1);
+    }
 }
 
-@keyframes kelpSway2 {
-    0%, 100% { transform: translateX(0) rotate(0deg); }
-    50% { transform: translateX(-10px) rotate(-4deg); }
-}
+/* Staggered animation delays for progressive painting */
+.kelp-blade-left-1 { animation-delay: 0.8s; }
+.kelp-blade-left-2 { animation-delay: 1.2s; }
+.kelp-blade-left-3 { animation-delay: 1.6s; }
+.kelp-blade-left-4 { animation-delay: 2s; }
+.kelp-blade-left-5 { animation-delay: 2.4s; }
+.kelp-blade-left-6 { animation-delay: 2.8s; }
 
-@keyframes kelpSway3 {
-    0%, 100% { transform: translateX(0) rotate(0deg); }
-    50% { transform: translateX(6px) rotate(2deg); }
-}
+.kelp-blade-right-1 { animation-delay: 1s; }
+.kelp-blade-right-2 { animation-delay: 1.4s; }
+.kelp-blade-right-3 { animation-delay: 1.8s; }
+.kelp-blade-right-4 { animation-delay: 2.2s; }
+.kelp-blade-right-5 { animation-delay: 2.6s; }
+.kelp-blade-right-6 { animation-delay: 3s; }
 
-/* Ocean floor */
-.ocean-floor {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 25%;
-    background:
-        radial-gradient(ellipse at 30% 50%, rgba(105, 95, 85, 0.2) 0%, transparent 50%),
-        radial-gradient(ellipse at 70% 60%, rgba(115, 105, 92, 0.15) 0%, transparent 45%),
-        linear-gradient(to bottom,
-            rgba(95, 88, 78, 0.25) 0%,
-            rgba(85, 78, 68, 0.3) 100%);
-    filter: blur(4px);
-}
+.color-blot-1 { animation-delay: 3.2s; }
+.color-blot-2 { animation-delay: 3.5s; }
+.color-blot-3 { animation-delay: 3.8s; }
+.color-blot-4 { animation-delay: 4.1s; }
 
-/* Rocks */
-.ocean-rock {
-    position: absolute;
-    border-radius: 50%;
-    background:
-        radial-gradient(ellipse at 40% 30%,
-            rgba(125, 115, 105, 0.25) 0%,
-            rgba(105, 95, 88, 0.35) 60%,
-            rgba(95, 88, 82, 0.4) 100%);
-    filter: blur(2.5px);
-    box-shadow: inset -8px -8px 20px rgba(75, 68, 62, 0.3);
-}
+.color-blot-dark-1 { animation-delay: 4.3s; }
+.color-blot-dark-2 { animation-delay: 4.6s; }
 
-.rock-1 {
-    left: 18%;
-    bottom: 15%;
-    width: 120px;
-    height: 80px;
-}
-
-.rock-2 {
-    right: 22%;
-    bottom: 12%;
-    width: 100px;
-    height: 70px;
-}
-
-.rock-3 {
-    left: 45%;
-    bottom: 18%;
-    width: 90px;
-    height: 60px;
-}
-
-/* Water particles for depth */
-.water-particle {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: radial-gradient(circle,
-        rgba(180, 205, 215, 0.15) 0%,
-        rgba(165, 195, 210, 0.05) 100%);
-    filter: blur(2px);
-    animation: particleFloat 8s ease-in-out infinite;
-}
-
-.particle-1 { left: 15%; top: 20%; animation-delay: 0s; }
-.particle-2 { left: 35%; top: 35%; animation-delay: 1s; }
-.particle-3 { left: 55%; top: 25%; animation-delay: 2s; }
-.particle-4 { left: 75%; top: 40%; animation-delay: 1.5s; }
-.particle-5 { left: 25%; top: 60%; animation-delay: 2.5s; }
-.particle-6 { right: 20%; top: 50%; animation-delay: 3s; }
-
-@keyframes particleFloat {
-    0%, 100% { transform: translate(0, 0); opacity: 0.3; }
-    25% { transform: translate(15px, -20px); opacity: 0.6; }
-    50% { transform: translate(5px, -40px); opacity: 0.4; }
-    75% { transform: translate(-10px, -25px); opacity: 0.5; }
-}
-
-/* Subtle water ambiance */
-.water-ambiance {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background:
-        radial-gradient(ellipse at 50% 30%,
-            rgba(145, 175, 190, 0.12) 0%,
-            transparent 60%),
-        radial-gradient(ellipse at 50% 70%,
-            rgba(155, 185, 200, 0.08) 0%,
-            transparent 50%);
-    filter: blur(40px);
-    animation: ambianceShift 12s ease-in-out infinite;
-}
-
-@keyframes ambianceShift {
-    0%, 100% { opacity: 0.6; }
-    50% { opacity: 0.8; }
-}
+.highlight-blot-1 { animation-delay: 4.8s; }
+.highlight-blot-2 { animation-delay: 5.1s; }
+.highlight-blot-3 { animation-delay: 5.4s; }
