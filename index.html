@@ -82,7 +82,8 @@
 
             // Only apply on mobile
             if (window.innerWidth <= 768) {
-                if (scrollTop > lastScrollTop && scrollTop > 60) {
+                // Hide when scrolled down just 30px to prevent any overlap (with padding)
+                if (scrollTop > lastScrollTop && scrollTop > 30) {
                     // Scrolling down
                     header.classList.add('hidden');
                     header.classList.remove('hidden-instant');
@@ -119,13 +120,21 @@
                     if (targetElement) {
                         e.preventDefault();
 
-                        // Quick hide with instant animation
-                        header.classList.add('hidden-instant');
+                        // Hide header instantly with no animation
+                        header.style.transition = 'none';
+                        header.classList.add('hidden');
 
-                        // Smooth scroll to target
-                        setTimeout(() => {
-                            targetElement.scrollIntoView({ behavior: 'smooth' });
-                        }, 100);
+                        // Snap to target instantly with offset for safe spacing
+                        const targetPosition = targetElement.offsetTop - 20;
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'auto'
+                        });
+
+                        // Re-enable transitions after snap
+                        requestAnimationFrame(() => {
+                            header.style.transition = '';
+                        });
                     }
                 }
             });
