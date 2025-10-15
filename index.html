@@ -11,81 +11,19 @@
 </head>
 
 <body>
-    <!-- Watercolor canvas -->
-    <div class="watercolor-canvas">
-        <svg class="watercolor-svg" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
-            <!-- SVG Filters for watercolor effects -->
-            <defs>
-                <!-- Watercolor texture filter -->
-                <filter id="watercolor-texture" x="-50%" y="-50%" width="200%" height="200%">
-                    <!-- Create organic texture -->
-                    <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" seed="2" />
-                    <feColorMatrix type="saturate" values="0.3"/>
-                    <feComponentTransfer>
-                        <feFuncA type="discrete" tableValues="0 1 1 1 1 1"/>
-                    </feComponentTransfer>
+    <!-- Abstract nature layer -->
+    <div class="nature-layer">
+        <!-- Gentle color washes inspired by Northern California -->
+        <div class="color-wash wash-ocean wash-1"></div>
+        <div class="color-wash wash-redwood wash-2"></div>
+        <div class="color-wash wash-fog wash-3"></div>
+        <div class="color-wash wash-sunset wash-4"></div>
+        <div class="color-wash wash-earth wash-5"></div>
 
-                    <!-- Displace the edges for organic feel -->
-                    <feDisplacementMap in="SourceGraphic" scale="8" xChannelSelector="R" yChannelSelector="G"/>
-
-                    <!-- Blur for soft watercolor edges -->
-                    <feGaussianBlur stdDeviation="2.5"/>
-
-                    <!-- Add paper texture -->
-                    <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" seed="10" result="texture"/>
-                    <feColorMatrix in="texture" type="saturate" values="0"/>
-                    <feBlend in="SourceGraphic" in2="texture" mode="multiply" opacity="0.3"/>
-                </filter>
-
-                <!-- Watercolor bleed/bleeding effect -->
-                <filter id="watercolor-bleed" x="-50%" y="-50%" width="200%" height="200%">
-                    <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="5" seed="5"/>
-                    <feDisplacementMap in="SourceGraphic" scale="15" xChannelSelector="R" yChannelSelector="G"/>
-                    <feGaussianBlur stdDeviation="4"/>
-                    <feColorMatrix type="matrix" values="1 0 0 0 0
-                                                           0 1 0 0 0
-                                                           0 0 1 0 0
-                                                           0 0 0 0.8 0"/>
-                </filter>
-            </defs>
-
-            <!-- Kelp frond group -->
-            <g transform="translate(600, 400)">
-                <!-- Main stem - curved path painted progressively -->
-                <path class="kelp-stem" d="M 0,200 Q -15,150 -10,100 Q -5,50 0,0 Q 5,-50 10,-100 Q 15,-150 0,-200" />
-
-                <!-- Left side blades (leaflets) -->
-                <ellipse class="kelp-blade-left kelp-blade-left-1" cx="-25" cy="-160" rx="35" ry="20" transform="rotate(-45 -25 -160)"/>
-                <ellipse class="kelp-blade-left kelp-blade-left-2" cx="-30" cy="-100" rx="40" ry="22" transform="rotate(-50 -30 -100)"/>
-                <ellipse class="kelp-blade-left kelp-blade-left-3" cx="-28" cy="-40" rx="38" ry="20" transform="rotate(-55 -28 -40)"/>
-                <ellipse class="kelp-blade-left kelp-blade-left-4" cx="-25" cy="20" rx="35" ry="18" transform="rotate(-50 -25 20)"/>
-                <ellipse class="kelp-blade-left kelp-blade-left-5" cx="-30" cy="80" rx="42" ry="24" transform="rotate(-45 -30 80)"/>
-                <ellipse class="kelp-blade-left kelp-blade-left-6" cx="-28" cy="140" rx="38" ry="21" transform="rotate(-48 -28 140)"/>
-
-                <!-- Right side blades (leaflets) -->
-                <ellipse class="kelp-blade-right kelp-blade-right-1" cx="25" cy="-180" rx="32" ry="18" transform="rotate(48 25 -180)"/>
-                <ellipse class="kelp-blade-right kelp-blade-right-2" cx="32" cy="-120" rx="38" ry="21" transform="rotate(52 32 -120)"/>
-                <ellipse class="kelp-blade-right kelp-blade-right-3" cx="30" cy="-60" rx="36" ry="19" transform="rotate(50 30 -60)"/>
-                <ellipse class="kelp-blade-right kelp-blade-right-4" cx="28" cy="0" rx="40" ry="22" transform="rotate(48 28 0)"/>
-                <ellipse class="kelp-blade-right kelp-blade-right-5" cx="32" cy="60" rx="38" ry="20" transform="rotate(52 32 60)"/>
-                <ellipse class="kelp-blade-right kelp-blade-right-6" cx="30" cy="120" rx="35" ry="19" transform="rotate(50 30 120)"/>
-
-                <!-- Color variation blots (lighter green) -->
-                <ellipse class="color-blot color-blot-1" cx="-12" cy="-120" rx="18" ry="25" opacity="0.5"/>
-                <ellipse class="color-blot color-blot-2" cx="8" cy="-40" rx="20" ry="28" opacity="0.5"/>
-                <ellipse class="color-blot color-blot-3" cx="-8" cy="30" rx="16" ry="22" opacity="0.5"/>
-                <ellipse class="color-blot color-blot-4" cx="10" cy="100" rx="22" ry="30" opacity="0.5"/>
-
-                <!-- Dark accent blots (shadows) -->
-                <ellipse class="color-blot-dark color-blot-dark-1" cx="-5" cy="-80" rx="12" ry="18" opacity="0.4"/>
-                <ellipse class="color-blot-dark color-blot-dark-2" cx="6" cy="50" rx="14" ry="20" opacity="0.4"/>
-
-                <!-- Highlight blots (wet paint highlights) -->
-                <ellipse class="highlight-blot highlight-blot-1" cx="4" cy="-140" rx="10" ry="14" opacity="0.3"/>
-                <ellipse class="highlight-blot highlight-blot-2" cx="-6" cy="0" rx="12" ry="16" opacity="0.3"/>
-                <ellipse class="highlight-blot highlight-blot-3" cx="8" cy="140" rx="11" ry="15" opacity="0.3"/>
-            </g>
-        </svg>
+        <!-- Subtle organic accents -->
+        <div class="organic-accent accent-kelp"></div>
+        <div class="organic-accent accent-branch"></div>
+        <div class="organic-accent accent-stone"></div>
     </div>
 
     <header class="site-header">

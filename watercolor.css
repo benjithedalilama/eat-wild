@@ -1,5 +1,5 @@
-/* Watercolor animation container */
-.watercolor-canvas {
+/* Abstract nature background layer */
+.nature-layer {
     position: fixed;
     top: 0;
     left: 0;
@@ -7,131 +7,156 @@
     height: 100vh;
     pointer-events: none;
     z-index: 0;
-    opacity: 0.7;
+    opacity: 0.15;
 }
 
-/* SVG watercolor styling */
-.watercolor-svg {
-    width: 100%;
-    height: 100%;
+/* Organic color washes - inspired by Northern California landscapes */
+.color-wash {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    mix-blend-mode: multiply;
+    animation: gentleDrift 45s ease-in-out infinite;
 }
 
-/* Kelp frond main stem */
-.kelp-stem {
-    fill: none;
-    stroke: #4a6e3c;
-    stroke-width: 8;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    filter: url(#watercolor-texture);
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 1000;
-    animation: paintStroke 3s ease-out forwards;
+/* Ocean/kelp greens */
+.wash-ocean {
+    background: radial-gradient(circle, rgba(88, 112, 70, 0.3) 0%, transparent 70%);
 }
 
-/* Kelp frond blade - left side */
-.kelp-blade-left {
-    fill: #5a7e4a;
-    stroke: #4a6e3c;
-    stroke-width: 2;
-    opacity: 0;
-    filter: url(#watercolor-texture);
-    animation: fadeInBlot 0.8s ease-out forwards;
+/* Redwood browns */
+.wash-redwood {
+    background: radial-gradient(circle, rgba(125, 75, 65, 0.25) 0%, transparent 70%);
 }
 
-/* Kelp frond blade - right side */
-.kelp-blade-right {
-    fill: #5a7e4a;
-    stroke: #4a6e3c;
-    stroke-width: 2;
-    opacity: 0;
-    filter: url(#watercolor-texture);
-    animation: fadeInBlot 0.8s ease-out forwards;
+/* Coastal fog grays */
+.wash-fog {
+    background: radial-gradient(circle, rgba(145, 155, 160, 0.2) 0%, transparent 70%);
 }
 
-/* Color variation blots */
-.color-blot {
-    fill: #6a8e5a;
-    opacity: 0;
-    filter: url(#watercolor-bleed);
-    animation: blotAppear 1s ease-out forwards;
+/* Sunset oranges */
+.wash-sunset {
+    background: radial-gradient(circle, rgba(215, 135, 95, 0.25) 0%, transparent 70%);
 }
 
-.color-blot-dark {
-    fill: #3a5e2c;
-    opacity: 0;
-    filter: url(#watercolor-bleed);
-    animation: blotAppear 1s ease-out forwards;
+/* Mushroom earth tones */
+.wash-earth {
+    background: radial-gradient(circle, rgba(145, 115, 95, 0.2) 0%, transparent 70%);
 }
 
-/* Highlight blots for wet watercolor effect */
-.highlight-blot {
-    fill: #7a9e6a;
-    opacity: 0;
-    filter: url(#watercolor-bleed);
-    animation: blotAppear 0.8s ease-out forwards;
+/* Individual wash positioning and sizing */
+.wash-1 {
+    width: 600px;
+    height: 600px;
+    left: 15%;
+    top: 10%;
+    animation-delay: 0s;
+    animation-duration: 50s;
 }
 
-/* Progressive painting animations */
-@keyframes paintStroke {
-    to {
-        stroke-dashoffset: 0;
+.wash-2 {
+    width: 500px;
+    height: 500px;
+    right: 20%;
+    top: 30%;
+    animation-delay: -15s;
+    animation-duration: 55s;
+}
+
+.wash-3 {
+    width: 550px;
+    height: 550px;
+    left: 40%;
+    bottom: 15%;
+    animation-delay: -30s;
+    animation-duration: 48s;
+}
+
+.wash-4 {
+    width: 450px;
+    height: 450px;
+    right: 15%;
+    bottom: 25%;
+    animation-delay: -20s;
+    animation-duration: 52s;
+}
+
+.wash-5 {
+    width: 520px;
+    height: 520px;
+    left: 25%;
+    top: 45%;
+    animation-delay: -10s;
+    animation-duration: 47s;
+}
+
+/* Gentle drift animation */
+@keyframes gentleDrift {
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.15;
     }
-}
-
-@keyframes fadeInBlot {
-    0% {
-        opacity: 0;
-        transform: scale(0.5);
+    25% {
+        transform: translate(30px, -20px) scale(1.05);
+        opacity: 0.2;
     }
     50% {
-        opacity: 0.8;
-        transform: scale(1.05);
+        transform: translate(-20px, 25px) scale(0.98);
+        opacity: 0.12;
     }
-    100% {
-        opacity: 0.85;
-        transform: scale(1);
+    75% {
+        transform: translate(25px, 15px) scale(1.02);
+        opacity: 0.18;
     }
 }
 
-@keyframes blotAppear {
-    0% {
+/* Optional: Very subtle organic shapes that fade in/out */
+.organic-accent {
+    position: absolute;
+    opacity: 0;
+    animation: fadeInOut 60s ease-in-out infinite;
+}
+
+.accent-kelp {
+    width: 3px;
+    height: 120px;
+    background: linear-gradient(to top, rgba(68, 92, 52, 0.3), transparent);
+    border-radius: 50%;
+    filter: blur(2px);
+    left: 30%;
+    bottom: 20%;
+    animation-delay: 0s;
+}
+
+.accent-branch {
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(to right, rgba(95, 75, 62, 0.25), transparent);
+    border-radius: 50%;
+    filter: blur(2px);
+    right: 25%;
+    top: 35%;
+    animation-delay: -20s;
+}
+
+.accent-stone {
+    width: 60px;
+    height: 40px;
+    background: radial-gradient(ellipse, rgba(105, 95, 88, 0.2), transparent);
+    border-radius: 50%;
+    filter: blur(4px);
+    left: 60%;
+    top: 60%;
+    animation-delay: -40s;
+}
+
+@keyframes fadeInOut {
+    0%, 100% {
         opacity: 0;
-        transform: scale(0.3);
+        transform: scale(0.95);
     }
-    60% {
-        opacity: 0.7;
-        transform: scale(1.1);
-    }
-    100% {
-        opacity: 0.6;
+    50% {
+        opacity: 1;
         transform: scale(1);
     }
 }
-
-/* Staggered animation delays for progressive painting */
-.kelp-blade-left-1 { animation-delay: 0.8s; }
-.kelp-blade-left-2 { animation-delay: 1.2s; }
-.kelp-blade-left-3 { animation-delay: 1.6s; }
-.kelp-blade-left-4 { animation-delay: 2s; }
-.kelp-blade-left-5 { animation-delay: 2.4s; }
-.kelp-blade-left-6 { animation-delay: 2.8s; }
-
-.kelp-blade-right-1 { animation-delay: 1s; }
-.kelp-blade-right-2 { animation-delay: 1.4s; }
-.kelp-blade-right-3 { animation-delay: 1.8s; }
-.kelp-blade-right-4 { animation-delay: 2.2s; }
-.kelp-blade-right-5 { animation-delay: 2.6s; }
-.kelp-blade-right-6 { animation-delay: 3s; }
-
-.color-blot-1 { animation-delay: 3.2s; }
-.color-blot-2 { animation-delay: 3.5s; }
-.color-blot-3 { animation-delay: 3.8s; }
-.color-blot-4 { animation-delay: 4.1s; }
-
-.color-blot-dark-1 { animation-delay: 4.3s; }
-.color-blot-dark-2 { animation-delay: 4.6s; }
-
-.highlight-blot-1 { animation-delay: 4.8s; }
-.highlight-blot-2 { animation-delay: 5.1s; }
-.highlight-blot-3 { animation-delay: 5.4s; }
