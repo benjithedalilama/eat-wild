@@ -71,47 +71,30 @@
     </main>
 
     <script>
-        let lastScrollTop = 0;
-        let lastScrollTime = Date.now();
         let isScrolling = false;
         const header = document.querySelector('.site-header');
         const navLinks = document.querySelectorAll('.side-nav a');
 
-        // Handle scroll events
+        // Handle scroll events with continuous push-up effect
         function handleScroll() {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            const currentTime = Date.now();
-
-            // Calculate scroll velocity
-            const scrollDelta = Math.abs(scrollTop - lastScrollTop);
-            const timeDelta = currentTime - lastScrollTime;
-            const velocity = timeDelta > 0 ? scrollDelta / timeDelta : 0;
 
             // Only apply on mobile
             if (window.innerWidth <= 768) {
-                // Hide when scrolled down just 30px to prevent any overlap (with padding)
-                if (scrollTop > lastScrollTop && scrollTop > 30) {
-                    // Scrolling down - adjust transition speed based on velocity
-                    // Fast scroll: 0.05s, normal scroll: 0.15s, slow scroll: 0.3s
-                    const transitionDuration = Math.max(0.05, Math.min(0.3, 0.3 - (velocity * 0.5)));
-                    header.style.transition = `transform ${transitionDuration}s ease-in-out`;
-                    header.classList.add('hidden');
-                    header.classList.remove('hidden-instant');
-                } else if (scrollTop < lastScrollTop) {
-                    // Scrolling up - always smooth
-                    header.style.transition = 'transform 0.3s ease-in-out';
-                    header.classList.remove('hidden', 'hidden-instant');
-                }
-            } else {
-                // Remove classes on desktop
-                header.classList.remove('hidden', 'hidden-instant');
-            }
+                // Gradually push header up starting from scroll position 0
+                // Header is 60px tall, start moving at 0px, fully hidden by 60px
+                const maxScroll = 60;
+                const translateY = Math.min(scrollTop, maxScroll);
 
-            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-            lastScrollTime = currentTime;
+                // Apply transform directly - no transition for continuous effect
+                header.style.transform = `translateY(-${translateY}px)`;
+            } else {
+                // Reset on desktop
+                header.style.transform = 'translateY(0)';
+            }
         }
 
-        // Debounce scroll events
+        // Use requestAnimationFrame for smooth continuous updates
         window.addEventListener('scroll', () => {
             if (!isScrolling) {
                 window.requestAnimationFrame(() => {
@@ -132,20 +115,14 @@
                     if (targetElement) {
                         e.preventDefault();
 
-                        // Hide header instantly with no animation
-                        header.style.transition = 'none';
-                        header.classList.add('hidden');
+                        // Hide header instantly
+                        header.style.transform = 'translateY(-60px)';
 
                         // Snap to target instantly with offset for safe spacing
                         const targetPosition = targetElement.offsetTop - 20;
                         window.scrollTo({
                             top: targetPosition,
                             behavior: 'auto'
-                        });
-
-                        // Re-enable transitions after snap
-                        requestAnimationFrame(() => {
-                            header.style.transition = '';
                         });
                     }
                 }
@@ -155,9 +132,12 @@
         // Handle window resize
         window.addEventListener('resize', () => {
             if (window.innerWidth > 768) {
-                header.classList.remove('hidden', 'hidden-instant');
+                header.style.transform = 'translateY(0)';
             }
         });
+
+        // Initialize on page load
+        handleScroll();
     </script>
 </body>
 
