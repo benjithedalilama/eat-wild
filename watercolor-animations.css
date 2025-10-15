@@ -1,0 +1,1685 @@
+/* Watercolor animation container */
+.watercolor-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+}
+
+.watercolor-canvas.active {
+    opacity: 1;
+}
+
+.watercolor-canvas.fade-out {
+    opacity: 0;
+}
+
+/* Individual watercolor scenes */
+.watercolor-scene {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+/* Scene 1: Sea urchin with spines */
+.scene-1 .urchin-body {
+    position: absolute;
+    left: 30%;
+    top: 40%;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%,
+        rgba(138, 87, 142, 0.4) 0%,
+        rgba(95, 58, 100, 0.6) 40%,
+        rgba(68, 42, 73, 0.7) 100%);
+    filter: blur(1px);
+    animation: urchinAppear 3s ease-in-out;
+}
+
+.scene-1 .urchin-spine {
+    position: absolute;
+    left: 30%;
+    top: 40%;
+    width: 2px;
+    height: 60px;
+    background: linear-gradient(to bottom,
+        rgba(68, 42, 73, 0.8),
+        rgba(68, 42, 73, 0.2));
+    transform-origin: bottom center;
+    filter: blur(0.5px);
+}
+
+/* Generate 40 spines */
+.scene-1 .spine-1 { transform: translate(60px, 60px) rotate(0deg); animation: spineGrow 0.3s 3s ease-out forwards; opacity: 0; }
+.scene-1 .spine-2 { transform: translate(60px, 60px) rotate(9deg); animation: spineGrow 0.3s 3.05s ease-out forwards; opacity: 0; }
+.scene-1 .spine-3 { transform: translate(60px, 60px) rotate(18deg); animation: spineGrow 0.3s 3.1s ease-out forwards; opacity: 0; }
+.scene-1 .spine-4 { transform: translate(60px, 60px) rotate(27deg); animation: spineGrow 0.3s 3.15s ease-out forwards; opacity: 0; }
+.scene-1 .spine-5 { transform: translate(60px, 60px) rotate(36deg); animation: spineGrow 0.3s 3.2s ease-out forwards; opacity: 0; }
+.scene-1 .spine-6 { transform: translate(60px, 60px) rotate(45deg); animation: spineGrow 0.3s 3.25s ease-out forwards; opacity: 0; }
+.scene-1 .spine-7 { transform: translate(60px, 60px) rotate(54deg); animation: spineGrow 0.3s 3.3s ease-out forwards; opacity: 0; }
+.scene-1 .spine-8 { transform: translate(60px, 60px) rotate(63deg); animation: spineGrow 0.3s 3.35s ease-out forwards; opacity: 0; }
+.scene-1 .spine-9 { transform: translate(60px, 60px) rotate(72deg); animation: spineGrow 0.3s 3.4s ease-out forwards; opacity: 0; }
+.scene-1 .spine-10 { transform: translate(60px, 60px) rotate(81deg); animation: spineGrow 0.3s 3.45s ease-out forwards; opacity: 0; }
+.scene-1 .spine-11 { transform: translate(60px, 60px) rotate(90deg); animation: spineGrow 0.3s 3.5s ease-out forwards; opacity: 0; }
+.scene-1 .spine-12 { transform: translate(60px, 60px) rotate(99deg); animation: spineGrow 0.3s 3.55s ease-out forwards; opacity: 0; }
+.scene-1 .spine-13 { transform: translate(60px, 60px) rotate(108deg); animation: spineGrow 0.3s 3.6s ease-out forwards; opacity: 0; }
+.scene-1 .spine-14 { transform: translate(60px, 60px) rotate(117deg); animation: spineGrow 0.3s 3.65s ease-out forwards; opacity: 0; }
+.scene-1 .spine-15 { transform: translate(60px, 60px) rotate(126deg); animation: spineGrow 0.3s 3.7s ease-out forwards; opacity: 0; }
+.scene-1 .spine-16 { transform: translate(60px, 60px) rotate(135deg); animation: spineGrow 0.3s 3.75s ease-out forwards; opacity: 0; }
+.scene-1 .spine-17 { transform: translate(60px, 60px) rotate(144deg); animation: spineGrow 0.3s 3.8s ease-out forwards; opacity: 0; }
+.scene-1 .spine-18 { transform: translate(60px, 60px) rotate(153deg); animation: spineGrow 0.3s 3.85s ease-out forwards; opacity: 0; }
+.scene-1 .spine-19 { transform: translate(60px, 60px) rotate(162deg); animation: spineGrow 0.3s 3.9s ease-out forwards; opacity: 0; }
+.scene-1 .spine-20 { transform: translate(60px, 60px) rotate(171deg); animation: spineGrow 0.3s 3.95s ease-out forwards; opacity: 0; }
+.scene-1 .spine-21 { transform: translate(60px, 60px) rotate(180deg); animation: spineGrow 0.3s 4s ease-out forwards; opacity: 0; }
+.scene-1 .spine-22 { transform: translate(60px, 60px) rotate(189deg); animation: spineGrow 0.3s 4.05s ease-out forwards; opacity: 0; }
+.scene-1 .spine-23 { transform: translate(60px, 60px) rotate(198deg); animation: spineGrow 0.3s 4.1s ease-out forwards; opacity: 0; }
+.scene-1 .spine-24 { transform: translate(60px, 60px) rotate(207deg); animation: spineGrow 0.3s 4.15s ease-out forwards; opacity: 0; }
+.scene-1 .spine-25 { transform: translate(60px, 60px) rotate(216deg); animation: spineGrow 0.3s 4.2s ease-out forwards; opacity: 0; }
+.scene-1 .spine-26 { transform: translate(60px, 60px) rotate(225deg); animation: spineGrow 0.3s 4.25s ease-out forwards; opacity: 0; }
+.scene-1 .spine-27 { transform: translate(60px, 60px) rotate(234deg); animation: spineGrow 0.3s 4.3s ease-out forwards; opacity: 0; }
+.scene-1 .spine-28 { transform: translate(60px, 60px) rotate(243deg); animation: spineGrow 0.3s 4.35s ease-out forwards; opacity: 0; }
+.scene-1 .spine-29 { transform: translate(60px, 60px) rotate(252deg); animation: spineGrow 0.3s 4.4s ease-out forwards; opacity: 0; }
+.scene-1 .spine-30 { transform: translate(60px, 60px) rotate(261deg); animation: spineGrow 0.3s 4.45s ease-out forwards; opacity: 0; }
+.scene-1 .spine-31 { transform: translate(60px, 60px) rotate(270deg); animation: spineGrow 0.3s 4.5s ease-out forwards; opacity: 0; }
+.scene-1 .spine-32 { transform: translate(60px, 60px) rotate(279deg); animation: spineGrow 0.3s 4.55s ease-out forwards; opacity: 0; }
+.scene-1 .spine-33 { transform: translate(60px, 60px) rotate(288deg); animation: spineGrow 0.3s 4.6s ease-out forwards; opacity: 0; }
+.scene-1 .spine-34 { transform: translate(60px, 60px) rotate(297deg); animation: spineGrow 0.3s 4.65s ease-out forwards; opacity: 0; }
+.scene-1 .spine-35 { transform: translate(60px, 60px) rotate(306deg); animation: spineGrow 0.3s 4.7s ease-out forwards; opacity: 0; }
+.scene-1 .spine-36 { transform: translate(60px, 60px) rotate(315deg); animation: spineGrow 0.3s 4.75s ease-out forwards; opacity: 0; }
+.scene-1 .spine-37 { transform: translate(60px, 60px) rotate(324deg); animation: spineGrow 0.3s 4.8s ease-out forwards; opacity: 0; }
+.scene-1 .spine-38 { transform: translate(60px, 60px) rotate(333deg); animation: spineGrow 0.3s 4.85s ease-out forwards; opacity: 0; }
+.scene-1 .spine-39 { transform: translate(60px, 60px) rotate(342deg); animation: spineGrow 0.3s 4.9s ease-out forwards; opacity: 0; }
+.scene-1 .spine-40 { transform: translate(60px, 60px) rotate(351deg); animation: spineGrow 0.3s 4.95s ease-out forwards; opacity: 0; }
+
+.scene-1 .kelp-strand {
+    position: absolute;
+    left: 50%;
+    top: 45%;
+    width: 40px;
+    height: 180px;
+    background: linear-gradient(to bottom,
+        rgba(88, 112, 70, 0.6),
+        rgba(68, 92, 52, 0.7),
+        rgba(58, 82, 45, 0.75));
+    border-radius: 50% 50% 30% 30%;
+    filter: blur(2px);
+    animation: kelpGrow 4s 5.5s ease-out forwards;
+    transform-origin: top center;
+    opacity: 0;
+    transform: scaleY(0);
+}
+
+/* Scene 2: Abalone crawling */
+.scene-2 .abalone-shell {
+    position: absolute;
+    left: 25%;
+    top: 55%;
+    width: 100px;
+    height: 70px;
+    border-radius: 50% 45% 40% 55%;
+    background:
+        radial-gradient(ellipse at 30% 30%, rgba(180, 215, 210, 0.4) 0%, transparent 50%),
+        radial-gradient(ellipse at 60% 40%, rgba(220, 180, 160, 0.3) 0%, transparent 40%),
+        radial-gradient(ellipse at 50% 60%, rgba(160, 190, 185, 0.5) 0%, transparent 45%),
+        linear-gradient(135deg,
+            rgba(95, 115, 125, 0.7) 0%,
+            rgba(120, 145, 140, 0.6) 30%,
+            rgba(145, 165, 155, 0.5) 60%,
+            rgba(115, 135, 130, 0.65) 100%);
+    filter: blur(1px);
+    animation: abaloneAppear 3s ease-out, abaloneCrawl 12s 3s linear forwards;
+}
+
+.scene-2 .abalone-holes {
+    position: absolute;
+    left: 25%;
+    top: 55%;
+    width: 100px;
+    height: 70px;
+    animation: abaloneCrawl 12s 3s linear forwards;
+}
+
+.scene-2 .hole {
+    position: absolute;
+    width: 6px;
+    height: 8px;
+    background: rgba(60, 70, 75, 0.5);
+    border-radius: 50%;
+    filter: blur(0.5px);
+    animation: holeAppear 0.3s ease-out forwards;
+    opacity: 0;
+}
+
+.scene-2 .hole-1 { left: 65%; top: 25%; animation-delay: 3.2s; }
+.scene-2 .hole-2 { left: 70%; top: 30%; animation-delay: 3.3s; }
+.scene-2 .hole-3 { left: 75%; top: 36%; animation-delay: 3.4s; }
+.scene-2 .hole-4 { left: 78%; top: 43%; animation-delay: 3.5s; }
+.scene-2 .hole-5 { left: 80%; top: 51%; animation-delay: 3.6s; }
+
+.scene-2 .rock {
+    position: absolute;
+    left: 60%;
+    top: 60%;
+    width: 140px;
+    height: 80px;
+    border-radius: 45% 55% 50% 50%;
+    background:
+        radial-gradient(ellipse at 40% 30%, rgba(135, 125, 115, 0.3) 0%, transparent 50%),
+        linear-gradient(145deg,
+            rgba(105, 95, 88, 0.6),
+            rgba(125, 115, 105, 0.5),
+            rgba(95, 88, 82, 0.65));
+    filter: blur(2px);
+    animation: rockAppear 2s 1s ease-out forwards;
+    opacity: 0;
+}
+
+/* Scene 3: Bolete mushroom emerging */
+.scene-3 .mushroom-cap {
+    position: absolute;
+    left: 40%;
+    top: 50%;
+    width: 110px;
+    height: 60px;
+    border-radius: 50% 50% 45% 45%;
+    background:
+        radial-gradient(ellipse at 35% 25%, rgba(165, 95, 65, 0.4) 0%, transparent 40%),
+        radial-gradient(ellipse at 50% 50%, rgba(145, 85, 60, 0.7) 0%, rgba(125, 70, 50, 0.8) 100%);
+    filter: blur(1.5px);
+    animation: mushroomCapGrow 4s 2s ease-out forwards;
+    transform-origin: bottom center;
+    opacity: 0;
+    transform: scaleY(0);
+}
+
+.scene-3 .mushroom-stem {
+    position: absolute;
+    left: 40%;
+    top: 50%;
+    width: 35px;
+    height: 70px;
+    margin-left: 37px;
+    margin-top: 50px;
+    border-radius: 30% 30% 40% 40%;
+    background: linear-gradient(to bottom,
+        rgba(215, 205, 185, 0.7),
+        rgba(195, 185, 170, 0.75),
+        rgba(175, 165, 150, 0.8));
+    filter: blur(1px);
+    animation: mushroomStemGrow 3s ease-out forwards;
+    transform-origin: top center;
+    opacity: 0;
+    transform: scaleY(0);
+}
+
+.scene-3 .forest-floor {
+    position: absolute;
+    left: 20%;
+    top: 65%;
+    width: 60%;
+    height: 3px;
+    background: linear-gradient(to right,
+        rgba(95, 75, 60, 0.5),
+        rgba(105, 85, 68, 0.6),
+        rgba(95, 75, 60, 0.5));
+    filter: blur(1px);
+    animation: floorAppear 2s ease-out forwards;
+    opacity: 0;
+}
+
+/* Scene 4: Babbling brook */
+.scene-4 .brook-water {
+    position: absolute;
+    left: 15%;
+    top: 45%;
+    width: 70%;
+    height: 40%;
+    background:
+        radial-gradient(ellipse at 30% 40%, rgba(180, 205, 215, 0.3) 0%, transparent 30%),
+        radial-gradient(ellipse at 60% 60%, rgba(165, 195, 210, 0.25) 0%, transparent 35%),
+        radial-gradient(ellipse at 45% 75%, rgba(175, 200, 215, 0.28) 0%, transparent 30%),
+        linear-gradient(135deg,
+            rgba(145, 175, 190, 0.4) 0%,
+            rgba(155, 185, 200, 0.35) 50%,
+            rgba(150, 180, 195, 0.38) 100%);
+    border-radius: 40% 30% 50% 45%;
+    filter: blur(3px);
+    animation: waterFlow 15s ease-in-out forwards;
+    opacity: 0;
+}
+
+.scene-4 .ripple {
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid rgba(135, 170, 190, 0.3);
+    animation: rippleExpand 3s ease-out infinite;
+}
+
+.scene-4 .ripple-1 {
+    left: 35%;
+    top: 55%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 1s;
+}
+
+.scene-4 .ripple-2 {
+    left: 55%;
+    top: 65%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 2.5s;
+}
+
+.scene-4 .ripple-3 {
+    left: 42%;
+    top: 70%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 4s;
+}
+
+.scene-4 .brook-stone {
+    position: absolute;
+    border-radius: 50%;
+    background: linear-gradient(135deg,
+        rgba(115, 105, 95, 0.5),
+        rgba(135, 125, 115, 0.45));
+    filter: blur(2px);
+    animation: stoneAppear 1s ease-out forwards;
+    opacity: 0;
+}
+
+.scene-4 .stone-1 { left: 25%; top: 50%; width: 45px; height: 35px; animation-delay: 2s; }
+.scene-4 .stone-2 { left: 60%; top: 62%; width: 55px; height: 42px; animation-delay: 2.5s; }
+.scene-4 .stone-3 { left: 45%; top: 72%; width: 38px; height: 30px; animation-delay: 3s; }
+
+/* Scene 5: Redwood forest */
+.scene-5 .redwood-trunk {
+    position: absolute;
+    bottom: 0;
+    width: 80px;
+    background: linear-gradient(to right,
+        rgba(125, 75, 65, 0.7),
+        rgba(145, 85, 70, 0.65),
+        rgba(135, 80, 68, 0.68),
+        rgba(115, 70, 62, 0.72));
+    filter: blur(2px);
+    animation: trunkGrow 5s ease-out forwards;
+    transform-origin: bottom center;
+    opacity: 0;
+    transform: scaleY(0);
+}
+
+.scene-5 .trunk-1 { left: 20%; height: 85%; }
+.scene-5 .trunk-2 { left: 45%; height: 78%; width: 70px; animation-delay: 0.5s; }
+.scene-5 .trunk-3 { left: 68%; height: 82%; width: 75px; animation-delay: 1s; }
+
+.scene-5 .canopy {
+    position: absolute;
+    width: 180px;
+    height: 120px;
+    border-radius: 50% 50% 45% 45%;
+    background: radial-gradient(ellipse at 40% 60%,
+        rgba(78, 102, 68, 0.4) 0%,
+        rgba(68, 92, 60, 0.5) 40%,
+        rgba(58, 82, 52, 0.45) 100%);
+    filter: blur(4px);
+    animation: canopyAppear 3s ease-out forwards;
+    opacity: 0;
+}
+
+.scene-5 .canopy-1 { left: 12%; top: 5%; animation-delay: 5.5s; }
+.scene-5 .canopy-2 { left: 38%; top: 12%; animation-delay: 6s; width: 160px; }
+.scene-5 .canopy-3 { left: 60%; top: 8%; animation-delay: 6.5s; width: 170px; }
+
+/* Scene 6: Coastal fog */
+.scene-6 .fog-layer {
+    position: absolute;
+    width: 100%;
+    height: 35%;
+    background: radial-gradient(ellipse at 50% 50%,
+        rgba(220, 225, 230, 0.25) 0%,
+        rgba(205, 210, 218, 0.18) 50%,
+        transparent 100%);
+    filter: blur(15px);
+    animation: fogDrift 20s ease-in-out forwards;
+}
+
+.scene-6 .fog-1 { top: 20%; animation-delay: 0s; }
+.scene-6 .fog-2 { top: 35%; animation-delay: 2s; opacity: 0.8; }
+.scene-6 .fog-3 { top: 50%; animation-delay: 4s; opacity: 0.6; }
+
+.scene-6 .cypress-tree {
+    position: absolute;
+    left: 65%;
+    bottom: 20%;
+    width: 60px;
+    height: 180px;
+    background: linear-gradient(to top,
+        rgba(65, 75, 65, 0.6) 0%,
+        rgba(75, 85, 75, 0.5) 100%);
+    border-radius: 45% 45% 0% 0%;
+    filter: blur(2px);
+    animation: treeAppear 4s ease-out forwards;
+    opacity: 0;
+    transform-origin: bottom center;
+    transform: scaleY(0);
+}
+
+/* Scene 7: Salmon swimming upstream */
+.scene-7 .salmon-body {
+    position: absolute;
+    left: 10%;
+    top: 50%;
+    width: 90px;
+    height: 35px;
+    border-radius: 50% 50% 50% 50%;
+    background: linear-gradient(to right,
+        rgba(185, 95, 85, 0.7),
+        rgba(195, 105, 95, 0.75),
+        rgba(175, 85, 78, 0.72));
+    filter: blur(1.5px);
+    animation: salmonSwim 12s ease-in-out forwards;
+    opacity: 0;
+}
+
+.scene-7 .salmon-tail {
+    position: absolute;
+    left: 10%;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border-left: 25px solid rgba(175, 85, 78, 0.7);
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    filter: blur(1px);
+    animation: salmonSwim 12s ease-in-out forwards;
+    margin-left: -22px;
+    margin-top: 2.5px;
+    opacity: 0;
+}
+
+.scene-7 .river-current {
+    position: absolute;
+    left: 0;
+    top: 40%;
+    width: 100%;
+    height: 30%;
+    background: repeating-linear-gradient(90deg,
+        rgba(155, 180, 195, 0.2) 0%,
+        rgba(165, 185, 200, 0.15) 5%,
+        rgba(155, 180, 195, 0.2) 10%);
+    filter: blur(2px);
+    animation: currentFlow 15s linear infinite;
+}
+
+/* Scene 8: Monarch butterfly on wildflower */
+.scene-8 .butterfly-wing-left {
+    position: absolute;
+    left: 45%;
+    top: 35%;
+    width: 40px;
+    height: 50px;
+    border-radius: 50% 20% 45% 50%;
+    background:
+        radial-gradient(ellipse at 60% 40%, rgba(235, 145, 65, 0.7) 0%, rgba(215, 115, 45, 0.75) 60%),
+        repeating-linear-gradient(135deg,
+            rgba(45, 35, 30, 0.6) 0px,
+            rgba(45, 35, 30, 0.6) 3px,
+            transparent 3px,
+            transparent 8px);
+    filter: blur(1px);
+    animation: wingFlapLeft 3s 2s ease-in-out forwards;
+    transform-origin: right center;
+    opacity: 0;
+}
+
+.scene-8 .butterfly-wing-right {
+    position: absolute;
+    left: 45%;
+    top: 35%;
+    width: 40px;
+    height: 50px;
+    margin-left: 35px;
+    border-radius: 20% 50% 50% 45%;
+    background:
+        radial-gradient(ellipse at 40% 40%, rgba(235, 145, 65, 0.7) 0%, rgba(215, 115, 45, 0.75) 60%),
+        repeating-linear-gradient(45deg,
+            rgba(45, 35, 30, 0.6) 0px,
+            rgba(45, 35, 30, 0.6) 3px,
+            transparent 3px,
+            transparent 8px);
+    filter: blur(1px);
+    animation: wingFlapRight 3s 2s ease-in-out forwards;
+    transform-origin: left center;
+    opacity: 0;
+}
+
+.scene-8 .wildflower-stem {
+    position: absolute;
+    left: 48%;
+    top: 50%;
+    width: 4px;
+    height: 150px;
+    background: linear-gradient(to bottom,
+        rgba(88, 112, 70, 0.7),
+        rgba(78, 102, 62, 0.75));
+    filter: blur(0.5px);
+    animation: stemGrow 2s ease-out forwards;
+    transform-origin: top center;
+    opacity: 0;
+    transform: scaleY(0);
+}
+
+.scene-8 .wildflower-petals {
+    position: absolute;
+    left: 48%;
+    top: 50%;
+    width: 50px;
+    height: 50px;
+    margin-left: -23px;
+    margin-top: -25px;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+        rgba(225, 185, 95, 0.8) 0%,
+        rgba(235, 205, 115, 0.7) 40%,
+        rgba(245, 215, 135, 0.5) 100%);
+    filter: blur(2px);
+    animation: petalsBloom 3s 2s ease-out forwards;
+    opacity: 0;
+    transform: scale(0);
+}
+
+/* Scene 9: Tidepools with anemones */
+.scene-9 .tidepool-water {
+    position: absolute;
+    left: 25%;
+    top: 40%;
+    width: 50%;
+    height: 35%;
+    border-radius: 45% 40% 50% 48%;
+    background:
+        radial-gradient(ellipse at 40% 30%, rgba(175, 200, 210, 0.35) 0%, transparent 50%),
+        linear-gradient(135deg,
+            rgba(145, 175, 190, 0.45),
+            rgba(155, 185, 200, 0.4));
+    filter: blur(2px);
+    animation: poolFill 4s ease-out forwards;
+    opacity: 0;
+}
+
+.scene-9 .anemone {
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 50%,
+        rgba(145, 85, 115, 0.6) 0%,
+        rgba(125, 75, 100, 0.7) 100%);
+    filter: blur(1.5px);
+    animation: anemoneAppear 2s ease-out forwards;
+    opacity: 0;
+}
+
+.scene-9 .anemone-1 { left: 32%; top: 52%; animation-delay: 4.5s; }
+.scene-9 .anemone-2 { left: 48%; top: 58%; animation-delay: 5s; }
+.scene-9 .anemone-3 { left: 60%; top: 50%; animation-delay: 5.5s; }
+
+.scene-9 .anemone-tentacles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.scene-9 .tentacle {
+    position: absolute;
+    width: 2px;
+    height: 12px;
+    background: linear-gradient(to bottom,
+        rgba(145, 85, 115, 0.5),
+        transparent);
+    transform-origin: bottom center;
+    animation: tentacleWave 2s ease-in-out infinite;
+}
+
+/* Scene 10: Chanterelle mushrooms */
+.scene-10 .chanterelle {
+    position: absolute;
+    width: 50px;
+    height: 40px;
+    border-radius: 50% 50% 45% 45%;
+    background:
+        radial-gradient(ellipse at 35% 30%, rgba(245, 195, 95, 0.5) 0%, transparent 40%),
+        radial-gradient(ellipse at 50% 50%, rgba(235, 175, 75, 0.7) 0%, rgba(215, 155, 60, 0.75) 100%);
+    filter: blur(1.5px);
+    animation: mushroomGrow 3s ease-out forwards;
+    transform-origin: bottom center;
+    opacity: 0;
+    transform: scale(0);
+}
+
+.scene-10 .chanterelle-1 { left: 30%; top: 55%; animation-delay: 1s; }
+.scene-10 .chanterelle-2 { left: 45%; top: 52%; width: 60px; height: 48px; animation-delay: 2s; }
+.scene-10 .chanterelle-3 { left: 58%; top: 58%; width: 45px; height: 38px; animation-delay: 3s; }
+
+.scene-10 .moss-patch {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(ellipse,
+        rgba(85, 105, 72, 0.5) 0%,
+        rgba(75, 95, 65, 0.45) 100%);
+    filter: blur(3px);
+    animation: mossGrow 2s ease-out forwards;
+    opacity: 0;
+}
+
+.scene-10 .moss-1 { left: 25%; top: 60%; width: 80px; height: 50px; animation-delay: 0.5s; }
+.scene-10 .moss-2 { left: 50%; top: 65%; width: 70px; height: 45px; animation-delay: 1s; }
+
+/* Scene 11: Hummingbird at sage */
+.scene-11 .hummingbird-body {
+    position: absolute;
+    left: 55%;
+    top: 38%;
+    width: 25px;
+    height: 20px;
+    border-radius: 50% 50% 55% 45%;
+    background: linear-gradient(135deg,
+        rgba(95, 145, 105, 0.7),
+        rgba(105, 165, 125, 0.75),
+        rgba(85, 135, 98, 0.72));
+    filter: blur(0.8px);
+    animation: hummingbirdHover 3s 2s ease-in-out infinite;
+    opacity: 0;
+}
+
+.scene-11 .hummingbird-beak {
+    position: absolute;
+    left: 55%;
+    top: 38%;
+    width: 15px;
+    height: 2px;
+    background: rgba(45, 40, 38, 0.7);
+    margin-left: 20px;
+    margin-top: 9px;
+    filter: blur(0.3px);
+    animation: hummingbirdHover 3s 2s ease-in-out infinite;
+    opacity: 0;
+}
+
+.scene-11 .sage-plant {
+    position: absolute;
+    left: 35%;
+    top: 50%;
+    width: 60px;
+    height: 80px;
+    border-radius: 40% 40% 35% 35%;
+    background:
+        radial-gradient(ellipse at 40% 35%, rgba(145, 155, 138, 0.4) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(125, 138, 115, 0.6) 0%, rgba(108, 122, 100, 0.65) 100%);
+    filter: blur(2.5px);
+    animation: plantGrow 3s ease-out forwards;
+    transform-origin: bottom center;
+    opacity: 0;
+    transform: scaleY(0);
+}
+
+/* Scene 12: Oak tree with acorns */
+.scene-12 .oak-trunk {
+    position: absolute;
+    left: 45%;
+    bottom: 0;
+    width: 65px;
+    height: 65%;
+    background: linear-gradient(to right,
+        rgba(95, 75, 62, 0.7),
+        rgba(110, 88, 72, 0.65),
+        rgba(105, 83, 68, 0.68));
+    border-radius: 40% 40% 0% 0%;
+    filter: blur(2px);
+    animation: oakTrunkGrow 5s ease-out forwards;
+    transform-origin: bottom center;
+    opacity: 0;
+    transform: scaleY(0);
+}
+
+.scene-12 .oak-foliage {
+    position: absolute;
+    left: 35%;
+    top: 20%;
+    width: 200px;
+    height: 150px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at 45% 55%,
+        rgba(88, 108, 75, 0.5) 0%,
+        rgba(78, 98, 68, 0.55) 40%,
+        rgba(68, 88, 60, 0.5) 100%);
+    filter: blur(5px);
+    animation: foliageGrow 4s 5s ease-out forwards;
+    opacity: 0;
+    transform: scale(0);
+}
+
+.scene-12 .acorn {
+    position: absolute;
+    width: 12px;
+    height: 16px;
+    border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+    background: linear-gradient(to bottom,
+        rgba(125, 95, 68, 0.7),
+        rgba(108, 82, 58, 0.75));
+    filter: blur(0.8px);
+    animation: acornAppear 1s ease-out forwards;
+    opacity: 0;
+}
+
+.scene-12 .acorn-1 { left: 42%; top: 42%; animation-delay: 9.5s; }
+.scene-12 .acorn-2 { left: 52%; top: 38%; animation-delay: 10s; }
+.scene-12 .acorn-3 { left: 48%; top: 48%; animation-delay: 10.5s; }
+
+/* Scene 13: Starfish on rock */
+.scene-13 .starfish {
+    position: absolute;
+    left: 42%;
+    top: 52%;
+    width: 90px;
+    height: 90px;
+    animation: starfishAppear 4s ease-out forwards;
+    opacity: 0;
+}
+
+.scene-13 .starfish-arm {
+    position: absolute;
+    width: 25px;
+    height: 45px;
+    background: linear-gradient(to bottom,
+        rgba(215, 125, 95, 0.7),
+        rgba(205, 115, 85, 0.75),
+        rgba(195, 105, 78, 0.72));
+    border-radius: 50% 50% 30% 30%;
+    filter: blur(1.5px);
+    transform-origin: top center;
+    left: 50%;
+    top: 0;
+    margin-left: -12.5px;
+}
+
+.scene-13 .arm-1 { transform: rotate(0deg); }
+.scene-13 .arm-2 { transform: rotate(72deg); }
+.scene-13 .arm-3 { transform: rotate(144deg); }
+.scene-13 .arm-4 { transform: rotate(216deg); }
+.scene-13 .arm-5 { transform: rotate(288deg); }
+
+.scene-13 .starfish-center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 20px;
+    height: 20px;
+    margin-left: -10px;
+    margin-top: -10px;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+        rgba(225, 135, 105, 0.8),
+        rgba(205, 115, 85, 0.75));
+    filter: blur(1px);
+}
+
+.scene-13 .ocean-rock {
+    position: absolute;
+    left: 38%;
+    top: 55%;
+    width: 160px;
+    height: 90px;
+    border-radius: 45% 50% 48% 52%;
+    background:
+        radial-gradient(ellipse at 35% 30%, rgba(125, 115, 105, 0.4) 0%, transparent 50%),
+        linear-gradient(140deg,
+            rgba(98, 90, 82, 0.65),
+            rgba(115, 105, 95, 0.6));
+    filter: blur(2.5px);
+    animation: rockGrow 3s ease-out forwards;
+    opacity: 0;
+    transform: scale(0);
+}
+
+/* Scene 14: Ferns unfurling */
+.scene-14 .fern-frond {
+    position: absolute;
+    top: 45%;
+    width: 4px;
+    height: 120px;
+    background: linear-gradient(to bottom,
+        rgba(75, 98, 68, 0.7),
+        rgba(68, 88, 62, 0.75));
+    filter: blur(0.8px);
+    animation: frondGrow 4s ease-out forwards;
+    transform-origin: bottom center;
+    opacity: 0;
+    transform: scaleY(0);
+}
+
+.scene-14 .fern-1 { left: 25%; animation-delay: 0s; }
+.scene-14 .fern-2 { left: 45%; animation-delay: 1s; }
+.scene-14 .fern-3 { left: 65%; animation-delay: 2s; }
+
+.scene-14 .fern-leaves {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.scene-14 .fern-leaf {
+    position: absolute;
+    width: 18px;
+    height: 8px;
+    background: rgba(75, 98, 68, 0.6);
+    border-radius: 0% 50% 50% 0%;
+    filter: blur(1px);
+    transform-origin: left center;
+    animation: leafUnfurl 1s ease-out forwards;
+    opacity: 0;
+}
+
+/* Scene 15: Banana slug on log */
+.scene-15 .fallen-log {
+    position: absolute;
+    left: 15%;
+    top: 55%;
+    width: 70%;
+    height: 50px;
+    border-radius: 25px;
+    background:
+        radial-gradient(ellipse at 30% 35%, rgba(105, 85, 68, 0.4) 0%, transparent 50%),
+        linear-gradient(to right,
+            rgba(88, 72, 58, 0.7),
+            rgba(98, 80, 65, 0.68),
+            rgba(92, 75, 62, 0.7));
+    filter: blur(2px);
+    animation: logAppear 3s ease-out forwards;
+    opacity: 0;
+}
+
+.scene-15 .banana-slug {
+    position: absolute;
+    left: 30%;
+    top: 52%;
+    width: 85px;
+    height: 22px;
+    border-radius: 50% 50% 45% 45%;
+    background: linear-gradient(to right,
+        rgba(218, 205, 95, 0.75),
+        rgba(225, 215, 105, 0.78),
+        rgba(212, 198, 88, 0.76));
+    filter: blur(1.2px);
+    animation: slugAppear 2s 3.5s ease-out forwards, slugCrawl 8s 5.5s linear forwards;
+    opacity: 0;
+}
+
+.scene-15 .slug-spots {
+    position: absolute;
+    left: 30%;
+    top: 52%;
+    width: 85px;
+    height: 22px;
+    animation: slugCrawl 8s 5.5s linear forwards;
+}
+
+.scene-15 .slug-spot {
+    position: absolute;
+    width: 8px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(175, 158, 72, 0.4);
+    filter: blur(0.5px);
+    animation: spotAppear 0.5s ease-out forwards;
+    opacity: 0;
+}
+
+.scene-15 .spot-1 { left: 25%; top: 30%; animation-delay: 6s; }
+.scene-15 .spot-2 { left: 45%; top: 40%; animation-delay: 6.2s; }
+.scene-15 .spot-3 { left: 65%; top: 35%; animation-delay: 6.4s; }
+
+/* Scene 16: California poppy blooming */
+.scene-16 .poppy-stem {
+    position: absolute;
+    left: 48%;
+    top: 50%;
+    width: 3px;
+    height: 110px;
+    background: linear-gradient(to bottom,
+        rgba(95, 118, 85, 0.7),
+        rgba(85, 108, 78, 0.75));
+    filter: blur(0.5px);
+    animation: poppyStemGrow 2.5s ease-out forwards;
+    transform-origin: top center;
+    opacity: 0;
+    transform: scaleY(0);
+}
+
+.scene-16 .poppy-petal {
+    position: absolute;
+    left: 48%;
+    top: 50%;
+    width: 45px;
+    height: 55px;
+    border-radius: 50% 50% 45% 45%;
+    background:
+        radial-gradient(ellipse at 40% 35%, rgba(255, 185, 75, 0.4) 0%, transparent 40%),
+        radial-gradient(ellipse at 50% 50%, rgba(245, 155, 65, 0.75) 0%, rgba(235, 135, 50, 0.8) 100%);
+    filter: blur(1.5px);
+    transform-origin: center bottom;
+    animation: petalOpen 2s ease-out forwards;
+    opacity: 0;
+}
+
+.scene-16 .petal-1 { transform: rotate(0deg) translateY(-35px); animation-delay: 2.8s; }
+.scene-16 .petal-2 { transform: rotate(90deg) translateY(-35px); animation-delay: 3.2s; }
+.scene-16 .petal-3 { transform: rotate(180deg) translateY(-35px); animation-delay: 3.6s; }
+.scene-16 .petal-4 { transform: rotate(270deg) translateY(-35px); animation-delay: 4s; }
+
+/* Scene 17: Sea otter floating */
+.scene-17 .ocean-surface {
+    position: absolute;
+    left: 0;
+    top: 45%;
+    width: 100%;
+    height: 40%;
+    background:
+        repeating-linear-gradient(90deg,
+            rgba(145, 175, 190, 0.3) 0%,
+            rgba(155, 185, 200, 0.25) 3%,
+            rgba(145, 175, 190, 0.3) 6%);
+    filter: blur(3px);
+    animation: oceanWaves 12s ease-in-out infinite;
+}
+
+.scene-17 .sea-otter {
+    position: absolute;
+    left: 45%;
+    top: 52%;
+    width: 65px;
+    height: 45px;
+    border-radius: 45% 55% 50% 50%;
+    background: linear-gradient(135deg,
+        rgba(85, 75, 68, 0.7),
+        rgba(95, 85, 78, 0.72),
+        rgba(88, 78, 72, 0.71));
+    filter: blur(1.5px);
+    animation: otterAppear 3s ease-out forwards, otterFloat 4s 3s ease-in-out infinite;
+    opacity: 0;
+}
+
+.scene-17 .otter-head {
+    position: absolute;
+    left: 45%;
+    top: 52%;
+    width: 28px;
+    height: 32px;
+    margin-left: 45px;
+    margin-top: -5px;
+    border-radius: 50% 50% 45% 45%;
+    background: linear-gradient(135deg,
+        rgba(92, 82, 75, 0.75),
+        rgba(102, 92, 85, 0.73));
+    filter: blur(1.2px);
+    animation: otterAppear 3s ease-out forwards, otterFloat 4s 3s ease-in-out infinite;
+    opacity: 0;
+}
+
+/* Scene 18: Newt in stream */
+.scene-18 .stream-bed {
+    position: absolute;
+    left: 20%;
+    top: 50%;
+    width: 60%;
+    height: 30%;
+    border-radius: 40% 35% 45% 40%;
+    background:
+        radial-gradient(ellipse at 45% 40%, rgba(165, 190, 200, 0.3) 0%, transparent 50%),
+        linear-gradient(135deg,
+            rgba(140, 170, 185, 0.4),
+            rgba(150, 180, 195, 0.38));
+    filter: blur(2.5px);
+    animation: streamFlow 3s ease-out forwards;
+    opacity: 0;
+}
+
+.scene-18 .newt-body {
+    position: absolute;
+    left: 35%;
+    top: 62%;
+    width: 55px;
+    height: 18px;
+    border-radius: 50% 50% 45% 45%;
+    background: linear-gradient(to right,
+        rgba(165, 95, 55, 0.75),
+        rgba(175, 105, 65, 0.78),
+        rgba(158, 88, 52, 0.76));
+    filter: blur(1px);
+    animation: newtAppear 2s 3.5s ease-out forwards, newtWalk 10s 5.5s linear forwards;
+    opacity: 0;
+}
+
+.scene-18 .newt-tail {
+    position: absolute;
+    left: 35%;
+    top: 62%;
+    width: 35px;
+    height: 12px;
+    margin-left: -30px;
+    margin-top: 3px;
+    border-radius: 50% 0% 0% 50%;
+    background: linear-gradient(to left,
+        rgba(165, 95, 55, 0.75),
+        rgba(158, 88, 52, 0.5));
+    filter: blur(1px);
+    animation: newtAppear 2s 3.5s ease-out forwards, newtWalk 10s 5.5s linear forwards;
+    opacity: 0;
+}
+
+/* Scene 19: Manzanita branches */
+.scene-19 .manzanita-branch {
+    position: absolute;
+    border-radius: 50%;
+    background: linear-gradient(135deg,
+        rgba(145, 85, 68, 0.7),
+        rgba(135, 75, 62, 0.72));
+    filter: blur(1.5px);
+    animation: branchGrow 3s ease-out forwards;
+    transform-origin: left center;
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+.scene-19 .branch-1 { left: 15%; top: 30%; width: 180px; height: 12px; animation-delay: 0s; }
+.scene-19 .branch-2 { left: 25%; top: 45%; width: 160px; height: 10px; transform: rotate(15deg); animation-delay: 0.8s; }
+.scene-19 .branch-3 { left: 35%; top: 58%; width: 140px; height: 11px; transform: rotate(-12deg); animation-delay: 1.6s; }
+
+.scene-19 .manzanita-leaves {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.scene-19 .manzanita-leaf {
+    position: absolute;
+    width: 18px;
+    height: 12px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse,
+        rgba(105, 125, 98, 0.6),
+        rgba(95, 115, 88, 0.65));
+    filter: blur(1px);
+    animation: leafAppear 1s ease-out forwards;
+    opacity: 0;
+}
+
+/* Scene 20: Coyote brush */
+.scene-20 .coyote-brush-base {
+    position: absolute;
+    left: 38%;
+    bottom: 25%;
+    width: 80px;
+    height: 120px;
+    border-radius: 45% 45% 35% 35%;
+    background:
+        radial-gradient(ellipse at 45% 40%, rgba(95, 115, 88, 0.5) 0%, transparent 60%),
+        radial-gradient(ellipse at 50% 60%, rgba(85, 105, 80, 0.55) 0%, rgba(75, 95, 72, 0.6) 100%);
+    filter: blur(3px);
+    animation: brushGrow 4s ease-out forwards;
+    transform-origin: bottom center;
+    opacity: 0;
+    transform: scaleY(0);
+}
+
+.scene-20 .brush-flowers {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+        rgba(235, 225, 205, 0.7),
+        rgba(225, 215, 195, 0.65));
+    filter: blur(0.8px);
+    animation: flowerPop 0.5s ease-out forwards;
+    opacity: 0;
+}
+
+/* Scene 21: Monarch chrysalis */
+.scene-21 .branch-support {
+    position: absolute;
+    left: 55%;
+    top: 25%;
+    width: 120px;
+    height: 8px;
+    background: linear-gradient(to right,
+        rgba(95, 82, 68, 0.7),
+        rgba(105, 90, 75, 0.68));
+    border-radius: 50%;
+    filter: blur(1px);
+    animation: branchAppear 2s ease-out forwards;
+    opacity: 0;
+}
+
+.scene-21 .chrysalis {
+    position: absolute;
+    left: 58%;
+    top: 28%;
+    width: 22px;
+    height: 32px;
+    border-radius: 50% 50% 45% 45%;
+    background:
+        radial-gradient(ellipse at 40% 30%, rgba(185, 215, 195, 0.4) 0%, transparent 50%),
+        linear-gradient(to bottom,
+            rgba(165, 195, 175, 0.75),
+            rgba(175, 205, 185, 0.78),
+            rgba(155, 185, 165, 0.76));
+    filter: blur(1px);
+    animation: chrysalisForm 4s 2.5s ease-out forwards;
+    opacity: 0;
+    transform: scale(0);
+}
+
+.scene-21 .gold-dots {
+    position: absolute;
+    left: 58%;
+    top: 28%;
+    width: 22px;
+    height: 32px;
+}
+
+.scene-21 .gold-dot {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: rgba(215, 185, 95, 0.8);
+    filter: blur(0.3px);
+    animation: dotShimmer 1s ease-out forwards;
+    opacity: 0;
+}
+
+/* Scene 22: Lupine field */
+.scene-22 .lupine-stem {
+    position: absolute;
+    bottom: 30%;
+    width: 5px;
+    background: linear-gradient(to bottom,
+        rgba(85, 105, 78, 0.7),
+        rgba(78, 95, 72, 0.75));
+    filter: blur(0.6px);
+    animation: lupineStemGrow 3s ease-out forwards;
+    transform-origin: bottom center;
+    opacity: 0;
+    transform: scaleY(0);
+}
+
+.scene-22 .stem-1 { left: 25%; height: 140px; animation-delay: 0s; }
+.scene-22 .stem-2 { left: 42%; height: 155px; animation-delay: 0.5s; }
+.scene-22 .stem-3 { left: 58%; height: 148px; animation-delay: 1s; }
+.scene-22 .stem-4 { left: 72%; height: 142px; animation-delay: 1.5s; }
+
+.scene-22 .lupine-flowers {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.scene-22 .lupine-bloom {
+    position: absolute;
+    width: 18px;
+    height: 12px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse,
+        rgba(125, 95, 165, 0.7),
+        rgba(115, 85, 155, 0.75));
+    filter: blur(1.2px);
+    animation: bloomAppear 0.5s ease-out forwards;
+    opacity: 0;
+}
+
+/* Scene 23: Dragonfly over pond */
+.scene-23 .pond-surface {
+    position: absolute;
+    left: 15%;
+    top: 52%;
+    width: 70%;
+    height: 32%;
+    border-radius: 50% 50% 48% 52%;
+    background:
+        radial-gradient(ellipse at 40% 35%, rgba(170, 195, 205, 0.35) 0%, transparent 55%),
+        linear-gradient(135deg,
+            rgba(140, 170, 185, 0.45),
+            rgba(150, 180, 195, 0.42));
+    filter: blur(3px);
+    animation: pondFill 4s ease-out forwards;
+    opacity: 0;
+}
+
+.scene-23 .dragonfly-body {
+    position: absolute;
+    left: 52%;
+    top: 42%;
+    width: 45px;
+    height: 6px;
+    background: linear-gradient(to right,
+        rgba(75, 105, 125, 0.75),
+        rgba(85, 115, 135, 0.78),
+        rgba(68, 98, 118, 0.76));
+    border-radius: 50%;
+    filter: blur(0.6px);
+    animation: dragonflyAppear 2s 4.5s ease-out forwards, dragonflyFly 6s 6.5s ease-in-out infinite;
+    opacity: 0;
+}
+
+.scene-23 .dragonfly-wings {
+    position: absolute;
+    left: 52%;
+    top: 42%;
+    width: 60px;
+    height: 35px;
+    margin-left: 10px;
+    margin-top: -14px;
+}
+
+.scene-23 .wing {
+    position: absolute;
+    width: 28px;
+    height: 16px;
+    background: radial-gradient(ellipse,
+        rgba(200, 215, 225, 0.35),
+        rgba(185, 200, 210, 0.25));
+    border-radius: 50%;
+    filter: blur(0.8px);
+    animation: wingFlutter 0.3s ease-in-out infinite;
+}
+
+.scene-23 .wing-1 { left: 0; top: 0; }
+.scene-23 .wing-2 { left: 0; top: 19px; }
+.scene-23 .wing-3 { right: 0; top: 0; }
+.scene-23 .wing-4 { right: 0; top: 19px; }
+
+/* Scene 24: Gray whale breach */
+.scene-24 .ocean-horizon {
+    position: absolute;
+    left: 0;
+    top: 55%;
+    width: 100%;
+    height: 45%;
+    background:
+        repeating-linear-gradient(90deg,
+            rgba(135, 165, 180, 0.35) 0%,
+            rgba(145, 175, 190, 0.32) 4%,
+            rgba(135, 165, 180, 0.35) 8%);
+    filter: blur(4px);
+    animation: oceanSwell 8s ease-in-out infinite;
+}
+
+.scene-24 .whale-body {
+    position: absolute;
+    left: 35%;
+    top: 48%;
+    width: 120px;
+    height: 60px;
+    border-radius: 50% 50% 45% 45%;
+    background: linear-gradient(135deg,
+        rgba(105, 115, 120, 0.7),
+        rgba(115, 125, 130, 0.72),
+        rgba(98, 108, 115, 0.71));
+    filter: blur(2px);
+    animation: whaleBreach 6s ease-in-out forwards;
+    opacity: 0;
+    transform: translateY(200px) rotate(-20deg);
+}
+
+.scene-24 .whale-tail {
+    position: absolute;
+    left: 35%;
+    top: 48%;
+    width: 60px;
+    height: 30px;
+    margin-left: -50px;
+    margin-top: 25px;
+    background: linear-gradient(to left,
+        rgba(105, 115, 120, 0.7),
+        rgba(98, 108, 115, 0.5));
+    border-radius: 50% 50% 40% 40%;
+    filter: blur(2px);
+    animation: whaleBreach 6s ease-in-out forwards;
+    opacity: 0;
+    transform: translateY(200px) rotate(-20deg);
+}
+
+.scene-24 .water-splash {
+    position: absolute;
+    left: 35%;
+    top: 55%;
+    width: 100px;
+    height: 80px;
+    background: radial-gradient(ellipse,
+        rgba(175, 195, 205, 0.5) 0%,
+        rgba(165, 185, 195, 0.3) 50%,
+        transparent 100%);
+    border-radius: 50%;
+    filter: blur(5px);
+    animation: splashAppear 2s 3s ease-out forwards;
+    opacity: 0;
+}
+
+/* Scene 25: Sunset through cypress */
+.scene-25 .sunset-sky {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(ellipse at 50% 40%, rgba(245, 165, 125, 0.3) 0%, transparent 45%),
+        radial-gradient(ellipse at 50% 50%, rgba(235, 145, 105, 0.25) 0%, transparent 50%),
+        linear-gradient(to bottom,
+            rgba(245, 185, 145, 0.2) 0%,
+            rgba(235, 155, 115, 0.25) 40%,
+            rgba(225, 175, 155, 0.18) 100%);
+    filter: blur(8px);
+    animation: sunsetGlow 10s ease-in-out forwards;
+    opacity: 0;
+}
+
+.scene-25 .sun-orb {
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    width: 80px;
+    height: 80px;
+    margin-left: -40px;
+    margin-top: -40px;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+        rgba(245, 195, 135, 0.6) 0%,
+        rgba(235, 175, 115, 0.5) 50%,
+        rgba(225, 155, 95, 0.3) 100%);
+    filter: blur(6px);
+    animation: sunAppear 5s ease-out forwards;
+    opacity: 0;
+}
+
+.scene-25 .cypress-silhouette {
+    position: absolute;
+    bottom: 15%;
+    width: 45px;
+    height: 200px;
+    background: linear-gradient(to top,
+        rgba(55, 60, 58, 0.7),
+        rgba(62, 67, 65, 0.68));
+    border-radius: 45% 45% 0% 0%;
+    filter: blur(1.5px);
+    animation: silhouetteAppear 3s 5s ease-out forwards;
+    opacity: 0;
+    transform-origin: bottom center;
+    transform: scaleY(0);
+}
+
+.scene-25 .cypress-1 { left: 25%; animation-delay: 5s; }
+.scene-25 .cypress-2 { right: 30%; height: 180px; animation-delay: 5.5s; }
+
+/* Keyframe animations */
+@keyframes urchinAppear {
+    from { opacity: 0; transform: scale(0); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes spineGrow {
+    from { opacity: 0; height: 0; }
+    to { opacity: 1; height: 60px; }
+}
+
+@keyframes kelpGrow {
+    from { opacity: 0; transform: scaleY(0); }
+    to { opacity: 1; transform: scaleY(1); }
+}
+
+@keyframes abaloneAppear {
+    from { opacity: 0; transform: scale(0); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes abaloneCrawl {
+    from { transform: translateX(0); }
+    to { transform: translateX(180px); }
+}
+
+@keyframes holeAppear {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes rockAppear {
+    from { opacity: 0; transform: scale(0); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes mushroomCapGrow {
+    from { opacity: 0; transform: scaleY(0); }
+    to { opacity: 1; transform: scaleY(1); }
+}
+
+@keyframes mushroomStemGrow {
+    from { opacity: 0; transform: scaleY(0); }
+    to { opacity: 1; transform: scaleY(1); }
+}
+
+@keyframes floorAppear {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes waterFlow {
+    from { opacity: 0; transform: translateX(-50px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes rippleExpand {
+    0% { opacity: 0; transform: scale(0); }
+    50% { opacity: 0.6; }
+    100% { opacity: 0; transform: scale(3); }
+}
+
+@keyframes stoneAppear {
+    from { opacity: 0; transform: scale(0); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes trunkGrow {
+    from { opacity: 0; transform: scaleY(0); }
+    to { opacity: 1; transform: scaleY(1); }
+}
+
+@keyframes canopyAppear {
+    from { opacity: 0; transform: scale(0); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fogDrift {
+    0% { opacity: 0; transform: translateX(-100px); }
+    50% { opacity: 1; }
+    100% { opacity: 0.7; transform: translateX(100px); }
+}
+
+@keyframes treeAppear {
+    from { opacity: 0; transform: scaleY(0); }
+    to { opacity: 1; transform: scaleY(1); }
+}
+
+@keyframes salmonSwim {
+    0% { opacity: 0; transform: translateX(0); }
+    10% { opacity: 1; }
+    100% { opacity: 1; transform: translateX(400px); }
+}
+
+@keyframes currentFlow {
+    from { transform: translateX(0); }
+    to { transform: translateX(50px); }
+}
+
+@keyframes wingFlapLeft {
+    0% { opacity: 0; transform: scaleX(0); }
+    50% { opacity: 1; transform: scaleX(1); }
+    75% { transform: scaleX(0.8); }
+    100% { transform: scaleX(1); }
+}
+
+@keyframes wingFlapRight {
+    0% { opacity: 0; transform: scaleX(0); }
+    50% { opacity: 1; transform: scaleX(1); }
+    75% { transform: scaleX(0.8); }
+    100% { transform: scaleX(1); }
+}
+
+@keyframes stemGrow {
+    from { opacity: 0; transform: scaleY(0); }
+    to { opacity: 1; transform: scaleY(1); }
+}
+
+@keyframes petalsBloom {
+    from { opacity: 0; transform: scale(0); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes poolFill {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes anemoneAppear {
+    from { opacity: 0; transform: scale(0); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes tentacleWave {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(15deg); }
+}
+
+@keyframes mushroomGrow {
+    from { opacity: 0; transform: scale(0); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes mossGrow {
+    from { opacity: 0; transform: scale(0); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes hummingbirdHover {
+    0%, 100% { transform: translateY(0); opacity: 1; }
+    50% { transform: translateY(-8px); }
+}
+
+@keyframes plantGrow {
+    from { opacity: 0; transform: scaleY(0); }
+    to { opacity: 1; transform: scaleY(1); }
+}
+
+@keyframes oakTrunkGrow {
+    from { opacity: 0; transform: scaleY(0); }
+    to { opacity: 1; transform: scaleY(1); }
+}
+
+@keyframes foliageGrow {
+    from { opacity: 0; transform: scale(0); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes acornAppear {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes starfishAppear {
+    from { opacity: 0; transform: scale(0) rotate(0deg); }
+    to { opacity: 1; transform: scale(1) rotate(360deg); }
+}
+
+@keyframes rockGrow {
+    from { opacity: 0; transform: scale(0); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes frondGrow {
+    from { opacity: 0; transform: scaleY(0); }
+    to { opacity: 1; transform: scaleY(1); }
+}
+
+@keyframes leafUnfurl {
+    from { opacity: 0; transform: scaleX(0); }
+    to { opacity: 1; transform: scaleX(1); }
+}
+
+@keyframes logAppear {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slugAppear {
+    from { opacity: 0; transform: scale(0); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slugCrawl {
+    from { transform: translateX(0); }
+    to { transform: translateX(150px); }
+}
+
+@keyframes spotAppear {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes poppyStemGrow {
+    from { opacity: 0; transform: scaleY(0); }
+    to { opacity: 1; transform: scaleY(1); }
+}
+
+@keyframes petalOpen {
+    from { opacity: 0; transform: scale(0); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes oceanWaves {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(20px); }
+}
+
+@keyframes otterAppear {
+    from { opacity: 0; transform: scale(0); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes otterFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(5deg); }
+}
+
+@keyframes streamFlow {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes newtAppear {
+    from { opacity: 0; transform: scale(0); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes newtWalk {
+    from { transform: translateX(0); }
+    to { transform: translateX(200px); }
+}
+
+@keyframes branchGrow {
+    from { opacity: 0; transform: scaleX(0); }
+    to { opacity: 1; transform: scaleX(1); }
+}
+
+@keyframes leafAppear {
+    from { opacity: 0; transform: scale(0); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes brushGrow {
+    from { opacity: 0; transform: scaleY(0); }
+    to { opacity: 1; transform: scaleY(1); }
+}
+
+@keyframes flowerPop {
+    from { opacity: 0; transform: scale(0); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes branchAppear {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes chrysalisForm {
+    from { opacity: 0; transform: scale(0) rotate(-10deg); }
+    to { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+@keyframes dotShimmer {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes lupineStemGrow {
+    from { opacity: 0; transform: scaleY(0); }
+    to { opacity: 1; transform: scaleY(1); }
+}
+
+@keyframes bloomAppear {
+    from { opacity: 0; transform: scale(0); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pondFill {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes dragonflyAppear {
+    from { opacity: 0; transform: scale(0); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes dragonflyFly {
+    0%, 100% { transform: translate(0, 0); }
+    25% { transform: translate(80px, -30px); }
+    50% { transform: translate(120px, 10px); }
+    75% { transform: translate(60px, 40px); }
+}
+
+@keyframes wingFlutter {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 0.3; }
+}
+
+@keyframes oceanSwell {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+@keyframes whaleBreach {
+    0% { opacity: 0; transform: translateY(200px) rotate(-20deg); }
+    30% { opacity: 1; transform: translateY(-50px) rotate(15deg); }
+    60% { transform: translateY(0) rotate(10deg); }
+    100% { opacity: 1; transform: translateY(180px) rotate(-15deg); }
+}
+
+@keyframes splashAppear {
+    0% { opacity: 0; transform: scale(0); }
+    50% { opacity: 0.8; transform: scale(1.2); }
+    100% { opacity: 0; transform: scale(1.5); }
+}
+
+@keyframes sunsetGlow {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes sunAppear {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes silhouetteAppear {
+    from { opacity: 0; transform: scaleY(0); }
+    to { opacity: 1; transform: scaleY(1); }
+}
