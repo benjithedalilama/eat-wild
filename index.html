@@ -69,6 +69,75 @@
             <p><a href="mailto:ben.imadali@gmail.com">reach out</a></p>
         </section>
     </main>
+
+    <script>
+        let lastScrollTop = 0;
+        let isScrolling = false;
+        const header = document.querySelector('.site-header');
+        const navLinks = document.querySelectorAll('.side-nav a');
+
+        // Handle scroll events
+        function handleScroll() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            // Only apply on mobile
+            if (window.innerWidth <= 768) {
+                if (scrollTop > lastScrollTop && scrollTop > 60) {
+                    // Scrolling down
+                    header.classList.add('hidden');
+                    header.classList.remove('hidden-instant');
+                } else if (scrollTop < lastScrollTop) {
+                    // Scrolling up
+                    header.classList.remove('hidden', 'hidden-instant');
+                }
+            } else {
+                // Remove classes on desktop
+                header.classList.remove('hidden', 'hidden-instant');
+            }
+
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        }
+
+        // Debounce scroll events
+        window.addEventListener('scroll', () => {
+            if (!isScrolling) {
+                window.requestAnimationFrame(() => {
+                    handleScroll();
+                    isScrolling = false;
+                });
+                isScrolling = true;
+            }
+        }, { passive: true });
+
+        // Handle navigation clicks
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                if (window.innerWidth <= 768) {
+                    const targetId = link.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+
+                    if (targetElement) {
+                        e.preventDefault();
+
+                        // Quick hide with instant animation
+                        header.classList.add('hidden-instant');
+
+                        // Smooth scroll to target
+                        setTimeout(() => {
+                            targetElement.scrollIntoView({ behavior: 'smooth' });
+                        }, 100);
+                    }
+                }
+            });
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                header.classList.remove('hidden', 'hidden-instant');
+            }
+        });
+    </script>
 </body>
 
 </html>
