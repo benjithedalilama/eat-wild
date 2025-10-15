@@ -72,6 +72,7 @@
 
     <script>
         let lastScrollTop = 0;
+        let lastScrollTime = Date.now();
         let isScrolling = false;
         const header = document.querySelector('.site-header');
         const navLinks = document.querySelectorAll('.side-nav a');
@@ -79,16 +80,26 @@
         // Handle scroll events
         function handleScroll() {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const currentTime = Date.now();
+
+            // Calculate scroll velocity
+            const scrollDelta = Math.abs(scrollTop - lastScrollTop);
+            const timeDelta = currentTime - lastScrollTime;
+            const velocity = timeDelta > 0 ? scrollDelta / timeDelta : 0;
 
             // Only apply on mobile
             if (window.innerWidth <= 768) {
                 // Hide when scrolled down just 30px to prevent any overlap (with padding)
                 if (scrollTop > lastScrollTop && scrollTop > 30) {
-                    // Scrolling down
+                    // Scrolling down - adjust transition speed based on velocity
+                    // Fast scroll: 0.05s, normal scroll: 0.15s, slow scroll: 0.3s
+                    const transitionDuration = Math.max(0.05, Math.min(0.3, 0.3 - (velocity * 0.5)));
+                    header.style.transition = `transform ${transitionDuration}s ease-in-out`;
                     header.classList.add('hidden');
                     header.classList.remove('hidden-instant');
                 } else if (scrollTop < lastScrollTop) {
-                    // Scrolling up
+                    // Scrolling up - always smooth
+                    header.style.transition = 'transform 0.3s ease-in-out';
                     header.classList.remove('hidden', 'hidden-instant');
                 }
             } else {
@@ -97,6 +108,7 @@
             }
 
             lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+            lastScrollTime = currentTime;
         }
 
         // Debounce scroll events
