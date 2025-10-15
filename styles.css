@@ -5,6 +5,8 @@
 }
 
 html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     background:
         /* Paper texture overlay */
         repeating-linear-gradient(
@@ -47,7 +49,6 @@ html {
         185% 185%,
         195% 195%,
         100% 100%;
-    background-attachment: fixed;
 }
 
 body {
@@ -70,6 +71,8 @@ body {
     padding: 0 20px;
     background: transparent;
     z-index: 100;
+    will-change: transform;
+    transform: translateZ(0);
 }
 
 .logo {
