@@ -1,10 +1,38 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
+type Event = {
+  id: string
+  title: string
+  description: string
+  date: string
+  location: string
+  price: number
+  ticketsAvailable: number
+}
+
 export default function Home() {
+  const [events, setEvents] = useState<Event[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    async function fetchEvents() {
+      try {
+        const response = await fetch('/api/events')
+        const data = await response.json()
+        setEvents(data)
+      } catch (error) {
+        console.error('Failed to fetch events:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchEvents()
+  }, [])
   useEffect(() => {
     let isScrolling = false
     const header = document.querySelector('.site-header') as HTMLElement
@@ -96,8 +124,25 @@ export default function Home() {
       <main className="content">
         <section id="experiences">
           <h1>experiences</h1>
-          <p>sf sunset mussels catch and cook: fine wine, fresh baguettes, and moules marinières oceanside with
-            a sunset view - sunday 11/2 @ 1pm, $200 pp, <Link href="/events/sf-sunset-mussels-2024">book</Link></p>
+          {loading ? (
+            <p>loading...</p>
+          ) : events.length === 0 ? (
+            <p>no upcoming experiences at the moment</p>
+          ) : (
+            events.map(event => {
+              const isSoldOut = event.ticketsAvailable <= 0
+              return (
+                <p key={event.id}>
+                  {event.title.toLowerCase()}: {event.description.toLowerCase()} - {event.date.toLowerCase()}, ${event.price} pp
+                  {isSoldOut ? (
+                    <span style={{ color: '#d00' }}> (sold out)</span>
+                  ) : (
+                    <>, <Link href={`/events/${event.id}`}>book</Link></>
+                  )}
+                </p>
+              )
+            })
+          )}
         </section>
 
         <section id="research">
