@@ -11,8 +11,8 @@ async function main() {
       additionalDetails: `
 **Meeting Location**
 Marshall's Beach parking lot
-GPS Coordinates: 37°48'11.6"N 122°28'36.9"W
 https://maps.google.com/?q=37.803222,-122.476917
+GPS Coordinates: 37°48'11.6"N 122°28'36.9"W
 
 **Fishing License Required**
 All participants must have a valid California one-day fishing license. You are legally responsible for obtaining your license before the event. Fines for fishing without a license can be significant.
@@ -55,8 +55,8 @@ Marshall's Beach requires a moderate hike down from the parking area:
       additionalDetails: `
 **Meeting Location**
 Marshall's Beach parking lot
-GPS Coordinates: 37°48'11.6"N 122°28'36.9"W
 https://maps.google.com/?q=37.803222,-122.476917
+GPS Coordinates: 37°48'11.6"N 122°28'36.9"W
 
 **Fishing License Required**
 All participants must have a valid California one-day fishing license. You are legally responsible for obtaining your license before the event. Fines for fishing without a license can be significant.
