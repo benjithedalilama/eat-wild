@@ -81,33 +81,6 @@ export default function EventPage() {
     }
   }
 
-  if (loading) {
-    return (
-      <div style={{ minHeight: '100vh', padding: '60px 20px 40px' }}>
-        <div style={{ maxWidth: '600px', margin: '0 auto' }}>
-          <p style={{ fontSize: '16px', fontWeight: 300, color: '#333' }}>loading...</p>
-        </div>
-      </div>
-    )
-  }
-
-  if (error && !event) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div style={{ textAlign: 'center', maxWidth: '400px', padding: '20px' }}>
-          <p style={{ fontSize: '16px', fontWeight: 300, color: '#333', marginBottom: '20px' }}>{error}</p>
-          <Link href="/" style={{ color: '#000', textDecoration: 'underline' }}>
-            back to home
-          </Link>
-        </div>
-      </div>
-    )
-  }
-
-  if (!event) return null
-
-  const isSoldOut = event.ticketsAvailable <= 0
-
   return (
     <div style={{ minHeight: '100vh', padding: '60px 20px 40px' }}>
       <div style={{ maxWidth: '600px', margin: '0 auto' }}>
@@ -130,34 +103,42 @@ export default function EventPage() {
           ← back
         </Link>
 
-        <div style={{ marginBottom: '40px' }}>
-          <h1 style={{ fontSize: '24px', fontWeight: 400, marginBottom: '20px' }}>{event.title}</h1>
+        {loading ? (
+          <p style={{ fontSize: '16px', fontWeight: 300, color: '#333' }}>loading...</p>
+        ) : error && !event ? (
+          <p style={{ fontSize: '16px', fontWeight: 300, color: '#333' }}>{error}</p>
+        ) : !event ? null : (() => {
+          const isSoldOut = event.ticketsAvailable <= 0
+          return (
+            <>
+              <div style={{ marginBottom: '40px' }}>
+                <h1 style={{ fontSize: '24px', fontWeight: 400, marginBottom: '20px' }}>{event.title}</h1>
 
-          <div style={{ marginBottom: '20px' }}>
-            <p style={{ fontSize: '16px', fontWeight: 300, marginBottom: '8px', color: '#333' }}>
-              {event.description}
-            </p>
-            <p style={{ fontSize: '16px', fontWeight: 300, marginBottom: '8px', color: '#333' }}>
-              <strong>when:</strong> {event.date}
-            </p>
-            <p style={{ fontSize: '16px', fontWeight: 300, marginBottom: '8px', color: '#333' }}>
-              <strong>where:</strong> {event.location}
-            </p>
-            <p style={{ fontSize: '16px', fontWeight: 300, marginBottom: '8px', color: '#333' }}>
-              <strong>price:</strong> ${event.price} per person
-            </p>
-            <p style={{ fontSize: '16px', fontWeight: 300, marginBottom: '8px', color: '#333' }}>
-              <strong>availability:</strong> {event.ticketsAvailable} of {event.maxCapacity} spots remaining
-            </p>
-            {isSoldOut && (
-              <p style={{ fontSize: '16px', fontWeight: 400, color: '#d00', marginBottom: '8px' }}>
-                sold out
-              </p>
-            )}
-          </div>
-        </div>
+                <div style={{ marginBottom: '20px' }}>
+                  <p style={{ fontSize: '16px', fontWeight: 300, marginBottom: '8px', color: '#333' }}>
+                    {event.description}
+                  </p>
+                  <p style={{ fontSize: '16px', fontWeight: 300, marginBottom: '8px', color: '#333' }}>
+                    <strong>when:</strong> {event.date}
+                  </p>
+                  <p style={{ fontSize: '16px', fontWeight: 300, marginBottom: '8px', color: '#333' }}>
+                    <strong>where:</strong> {event.location}
+                  </p>
+                  <p style={{ fontSize: '16px', fontWeight: 300, marginBottom: '8px', color: '#333' }}>
+                    <strong>price:</strong> ${event.price} per person
+                  </p>
+                  <p style={{ fontSize: '16px', fontWeight: 300, marginBottom: '8px', color: '#333' }}>
+                    <strong>availability:</strong> {event.ticketsAvailable} of {event.maxCapacity} spots remaining
+                  </p>
+                  {isSoldOut && (
+                    <p style={{ fontSize: '16px', fontWeight: 400, color: '#d00', marginBottom: '8px' }}>
+                      sold out
+                    </p>
+                  )}
+                </div>
+              </div>
 
-        {!isSoldOut && (
+              {!isSoldOut && (
           <div>
             <h2 style={{ fontSize: '20px', fontWeight: 400, marginBottom: '16px' }}>book your spot</h2>
 
@@ -250,7 +231,10 @@ export default function EventPage() {
               </button>
             </form>
           </div>
-        )}
+              )}
+            </>
+          )
+        })()}
       </div>
     </div>
   )
