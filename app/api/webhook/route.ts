@@ -109,7 +109,7 @@ export async function POST(request: NextRequest) {
                 filename: 'logo.png',
                 content: logoContent,
                 content_id: 'logo',
-              },
+              } as any,
             ],
           })
           console.log('Email sent successfully:', emailResult)
