@@ -65,8 +65,8 @@ export async function POST(request: NextRequest) {
       // Send confirmation email
       if (process.env.RESEND_API_KEY) {
         try {
-          // Read and encode the logo as base64 for inline attachment
-          const logoPath = join(process.cwd(), 'public', 'favicon.svg')
+          // Read and encode the logo as base64 for inline attachment (PNG for email compatibility)
+          const logoPath = join(process.cwd(), 'public', 'logo-email.png')
           const logoContent = readFileSync(logoPath).toString('base64')
 
           const emailResult = await resend.emails.send({
@@ -106,7 +106,7 @@ export async function POST(request: NextRequest) {
           `,
             attachments: [
               {
-                filename: 'logo.svg',
+                filename: 'logo.png',
                 content: logoContent,
                 content_id: 'logo',
               },
