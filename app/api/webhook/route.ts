@@ -69,8 +69,9 @@ export async function POST(request: NextRequest) {
             subject: `Your ticket for ${ticket.event.title}`,
             html: `
             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
-              <div style="margin-bottom: 40px;">
-                <img src="${process.env.NEXT_PUBLIC_APP_URL}/logo-email.png" alt="Eat Wild" width="80" height="80" style="display: block;" />
+              <div style="display: flex; align-items: center; margin-bottom: 40px;">
+                <img src="${process.env.NEXT_PUBLIC_APP_URL}/logo-email.png" alt="Eat Wild" width="32" height="32" style="display: block; margin-right: 12px;" />
+                <span style="font-size: 20px; font-weight: 300; color: #000;">eat wild</span>
               </div>
 
               <h1 style="font-size: 24px; font-weight: 400; margin-bottom: 20px; color: #000;">Thank you for booking!</h1>
