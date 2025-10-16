@@ -83,8 +83,10 @@ export default function EventPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p style={{ fontSize: '16px', fontWeight: 300, color: '#333' }}>loading...</p>
+      <div style={{ minHeight: '100vh', padding: '60px 20px 40px' }}>
+        <div style={{ maxWidth: '600px', margin: '0 auto' }}>
+          <p style={{ fontSize: '16px', fontWeight: 300, color: '#333' }}>loading...</p>
+        </div>
       </div>
     )
   }
