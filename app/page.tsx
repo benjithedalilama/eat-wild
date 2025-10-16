@@ -134,11 +134,8 @@ export default function Home() {
               return (
                 <p key={event.id}>
                   {event.title.toLowerCase()}: {event.description.toLowerCase()} - {event.date.toLowerCase()}, ${event.price} pp
-                  {isSoldOut ? (
-                    <span style={{ color: '#d00' }}> (sold out)</span>
-                  ) : (
-                    <>, <Link href={`/events/${event.id}`}>book</Link></>
-                  )}
+                  {isSoldOut && <span style={{ color: '#d00' }}> (sold out)</span>}
+                  , <Link href={`/events/${event.id}`}>learn more</Link>
                 </p>
               )
             })
