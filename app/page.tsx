@@ -21,7 +21,9 @@ export default function Home() {
   useEffect(() => {
     async function fetchEvents() {
       try {
-        const response = await fetch('/api/events')
+        const response = await fetch('/api/events', {
+          cache: 'no-store',
+        })
         const data = await response.json()
         setEvents(data)
       } catch (error) {
@@ -32,75 +34,47 @@ export default function Home() {
     }
 
     fetchEvents()
+
+    // Refetch when user returns to the page
+    const handleVisibilityChange = () => {
+      if (!document.hidden) {
+        fetchEvents()
+      }
+    }
+
+    const handleFocus = () => {
+      fetchEvents()
+    }
+
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+    window.addEventListener('focus', handleFocus)
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
+      window.removeEventListener('focus', handleFocus)
+    }
   }, [])
   useEffect(() => {
-    let isScrolling = false
-    const header = document.querySelector('.site-header') as HTMLElement
-    const navLinks = document.querySelectorAll('.side-nav a')
+    const handleScroll = () => {
+      const header = document.querySelector('.site-header') as HTMLElement
+      if (!header) return
 
-    function handleScroll() {
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop
-
       if (window.innerWidth <= 768) {
-        const maxScroll = 60
-        const translateY = Math.min(scrollTop, maxScroll)
-        if (header) {
-          header.style.transform = `translateY(-${translateY}px)`
-        }
+        const translateY = Math.min(scrollTop, 60)
+        header.style.transform = `translateY(-${translateY}px)`
       } else {
-        if (header) {
-          header.style.transform = 'translateY(0)'
-        }
-      }
-    }
-
-    const scrollHandler = () => {
-      if (!isScrolling) {
-        window.requestAnimationFrame(() => {
-          handleScroll()
-          isScrolling = false
-        })
-        isScrolling = true
-      }
-    }
-
-    window.addEventListener('scroll', scrollHandler, { passive: true })
-
-    navLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        if (window.innerWidth <= 768) {
-          const targetId = link.getAttribute('href')
-          const targetElement = targetId ? document.querySelector(targetId) : null
-
-          if (targetElement && targetId?.startsWith('#')) {
-            e.preventDefault()
-
-            if (header) {
-              header.style.transform = 'translateY(-60px)'
-            }
-
-            const targetPosition = (targetElement as HTMLElement).offsetTop - 20
-            window.scrollTo({
-              top: targetPosition,
-              behavior: 'auto'
-            })
-          }
-        }
-      })
-    })
-
-    const resizeHandler = () => {
-      if (window.innerWidth > 768 && header) {
         header.style.transform = 'translateY(0)'
       }
     }
 
-    window.addEventListener('resize', resizeHandler)
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('resize', handleScroll)
     handleScroll()
 
     return () => {
-      window.removeEventListener('scroll', scrollHandler)
-      window.removeEventListener('resize', resizeHandler)
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', handleScroll)
     }
   }, [])
 

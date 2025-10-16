@@ -50,6 +50,7 @@ export async function POST(request: NextRequest) {
             product_data: {
               name: event.title,
               description: `${event.description} - ${event.date}`,
+              images: [`${process.env.NEXT_PUBLIC_APP_URL}/favicon.svg`],
             },
             unit_amount: event.price * 100, // Convert dollars to cents
           },
@@ -65,6 +66,12 @@ export async function POST(request: NextRequest) {
         eventId,
         customerName,
         customerEmail,
+      },
+      ui_mode: 'hosted',
+      custom_text: {
+        submit: {
+          message: 'Complete your booking for Eat Wild',
+        },
       },
     })
 

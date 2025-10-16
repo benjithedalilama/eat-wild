@@ -33,7 +33,9 @@ export default function EventPage() {
   useEffect(() => {
     async function fetchEvent() {
       try {
-        const response = await fetch(`/api/events/${eventId}`)
+        const response = await fetch(`/api/events/${eventId}`, {
+          cache: 'no-store',
+        })
         if (!response.ok) {
           throw new Error('Event not found')
         }
@@ -48,6 +50,25 @@ export default function EventPage() {
     }
 
     fetchEvent()
+
+    // Refetch when user returns to the page (e.g., after booking)
+    const handleVisibilityChange = () => {
+      if (!document.hidden) {
+        fetchEvent()
+      }
+    }
+
+    const handleFocus = () => {
+      fetchEvent()
+    }
+
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+    window.addEventListener('focus', handleFocus)
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
+      window.removeEventListener('focus', handleFocus)
+    }
   }, [eventId])
 
   const handleSubmit = async (e: React.FormEvent) => {

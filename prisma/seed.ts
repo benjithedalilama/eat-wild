@@ -19,6 +19,21 @@ async function main() {
   })
 
   console.log('Seeded event:', event)
+
+  // Create 10 test tickets for the event
+  console.log('Creating 10 test tickets...')
+  for (let i = 1; i <= 10; i++) {
+    await prisma.ticket.create({
+      data: {
+        eventId: event.id,
+        customerName: `Test Customer ${i}`,
+        customerEmail: `test${i}@example.com`,
+        stripeSessionId: `test_session_${event.id}_${i}_${Date.now()}`,
+      },
+    })
+  }
+
+  console.log('Created 10 test tickets')
 }
 
 main()
