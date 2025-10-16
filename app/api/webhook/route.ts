@@ -18,17 +18,25 @@ function formatAdditionalDetailsForEmail(text: string): string {
     // Check if line starts with ** (markdown heading)
     if (line.trim().startsWith('**') && line.includes('**', 2)) {
       const headingText = line.replace(/\*\*/g, '').trim()
-      htmlParts.push(`<p style="font-size: 16px; font-weight: 400; margin-bottom: 8px; margin-top: 16px; color: #000; text-align: left;">${headingText}</p>`)
+      htmlParts.push(`<p style="font-size: 16px; font-weight: 400; margin-bottom: 12px; margin-top: 20px; color: #000; text-align: left;">${headingText}</p>`)
     } else if (line.trim().startsWith('-')) {
       // Bullet point
       const bulletText = line.trim().substring(1).trim()
-      htmlParts.push(`<p style="font-size: 16px; font-weight: 300; margin-bottom: 4px; color: #333; text-align: left;">${bulletText}</p>`)
+      htmlParts.push(`<p style="font-size: 16px; font-weight: 300; margin-bottom: 8px; color: #333; text-align: left; padding-left: 0;">${bulletText}</p>`)
     } else if (line.trim() === '') {
       // Empty line for spacing
-      htmlParts.push('<div style="height: 8px;"></div>')
+      htmlParts.push('<div style="height: 12px;"></div>')
     } else {
-      // Regular text
-      htmlParts.push(`<p style="font-size: 16px; font-weight: 300; margin-bottom: 4px; color: #333; text-align: left;">${line}</p>`)
+      // Regular text - check if it has a colon for label:value format
+      const colonIndex = line.indexOf(':')
+      if (colonIndex > 0 && colonIndex < 50) {
+        // Likely a label:value pair
+        const label = line.substring(0, colonIndex + 1)
+        const value = line.substring(colonIndex + 1).trim()
+        htmlParts.push(`<p style="font-size: 16px; font-weight: 300; margin-bottom: 8px; color: #333; text-align: left;"><strong>${label}</strong> ${value}</p>`)
+      } else {
+        htmlParts.push(`<p style="font-size: 16px; font-weight: 300; margin-bottom: 8px; color: #333; text-align: left;">${line}</p>`)
+      }
     }
   })
 
@@ -95,10 +103,10 @@ export async function POST(request: NextRequest) {
             subject: `Your ticket for ${ticket.event.title}`,
             html: `
             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
-              <div style="display: flex; align-items: center; margin-bottom: 40px;">
+              <a href="${process.env.NEXT_PUBLIC_APP_URL}" style="display: flex; align-items: center; margin-bottom: 40px; text-decoration: none;">
                 <img src="${process.env.NEXT_PUBLIC_APP_URL}/logo-email.png" alt="Eat Wild" width="32" height="32" style="display: block; margin-right: 12px;" />
                 <span style="font-size: 20px; font-weight: 300; color: #000;">eat wild</span>
-              </div>
+              </a>
 
               <h1 style="font-size: 24px; font-weight: 400; margin-bottom: 20px; color: #000;">Thank you for booking!</h1>
 
@@ -107,23 +115,13 @@ export async function POST(request: NextRequest) {
               <p style="font-size: 16px; font-weight: 300; margin-bottom: 20px; color: #333;">Your ticket for <strong>${ticket.event.title}</strong> has been confirmed.</p>
 
               <div style="background: #f5f3ed; padding: 20px; border-radius: 4px; margin-bottom: 20px;">
-                <h2 style="font-size: 18px; font-weight: 400; margin-bottom: 12px; color: #000;">Event Details</h2>
-                <p style="font-size: 16px; font-weight: 300; margin-bottom: 8px; color: #333;"><strong>Event:</strong> ${ticket.event.title}</p>
-                <p style="font-size: 16px; font-weight: 300; margin-bottom: 8px; color: #333;"><strong>Date:</strong> ${ticket.event.date}</p>
-                <p style="font-size: 16px; font-weight: 300; margin-bottom: 8px; color: #333;"><strong>Location:</strong> ${ticket.event.location}</p>
-                <p style="font-size: 16px; font-weight: 300; margin-bottom: 0; color: #333;"><strong>Description:</strong> ${ticket.event.description}</p>
-              </div>
-
-              ${ticket.event.additionalDetails ? `
-              <div style="background: #f5f3ed; padding-top: 20px; padding-bottom: 20px; border-radius: 4px; margin-bottom: 20px;">
                 <h2 style="font-size: 18px; font-weight: 400; margin-bottom: 12px; color: #000; text-align: left;">important details for attendees</h2>
-                <div style="line-height: 1.6;">${formatAdditionalDetailsForEmail(ticket.event.additionalDetails)}</div>
+                <p style="font-size: 16px; font-weight: 300; margin-bottom: 8px; color: #333;"><strong>event:</strong> ${ticket.event.title}</p>
+                <p style="font-size: 16px; font-weight: 300; margin-bottom: 8px; color: #333;"><strong>date:</strong> ${ticket.event.date}</p>
+                <p style="font-size: 16px; font-weight: 300; margin-bottom: 8px; color: #333;"><strong>location:</strong> ${ticket.event.location}</p>
+                <p style="font-size: 16px; font-weight: 300; margin-bottom: ${ticket.event.additionalDetails ? '8px' : '0'}; color: #333;"><strong>description:</strong> ${ticket.event.description}</p>
+                ${ticket.event.additionalDetails ? `<div style="line-height: 1.6; margin-top: 20px;">${formatAdditionalDetailsForEmail(ticket.event.additionalDetails)}</div>` : ''}
               </div>
-              ` : ''}
-
-              <p style="font-size: 16px; font-weight: 300; margin-bottom: 20px; color: #333;">
-                <a href="${process.env.NEXT_PUBLIC_APP_URL}/events/${eventId}" style="color: #000; text-decoration: underline;">View event details</a>
-              </p>
 
               <p style="font-size: 16px; font-weight: 300; margin-bottom: 8px; color: #333;">We look forward to seeing you!</p>
 

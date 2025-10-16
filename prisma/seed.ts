@@ -42,8 +42,6 @@ Marshall's Beach requires a moderate hike down from the parking area:
 - Terrain: Steep, sandy trail with uneven footing
 - Duration: 10-15 minutes down, 15-20 minutes back up
 - Difficulty: Moderate
-
-The beach is worth it! But be prepared for a workout on the way back up.
       `.trim(),
     },
     create: {
@@ -88,8 +86,6 @@ Marshall's Beach requires a moderate hike down from the parking area:
 - Terrain: Steep, sandy trail with uneven footing
 - Duration: 10-15 minutes down, 15-20 minutes back up
 - Difficulty: Moderate
-
-The beach is worth it! But be prepared for a workout on the way back up.
       `.trim(),
     },
   })
