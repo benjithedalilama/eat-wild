@@ -114,6 +114,20 @@ export default function EventPage() {
           <span style={{ fontSize: '20px', fontWeight: 300 }}>eat wild</span>
         </Link>
 
+        <Link href="/" style={{
+          display: 'inline-block',
+          fontSize: '14px',
+          fontWeight: 300,
+          color: '#666',
+          textDecoration: 'none',
+          marginBottom: '24px',
+          transition: 'opacity 0.2s'
+        }}
+        onMouseEnter={(e) => e.currentTarget.style.opacity = '0.5'}
+        onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}>
+          ← back
+        </Link>
+
         <div style={{ marginBottom: '40px' }}>
           <h1 style={{ fontSize: '24px', fontWeight: 400, marginBottom: '20px' }}>{event.title}</h1>
 
