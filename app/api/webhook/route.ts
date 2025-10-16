@@ -13,19 +13,30 @@ function formatAdditionalDetailsForEmail(text: string): string {
   // Convert to lowercase and split into lines
   const lines = text.toLowerCase().split('\n')
   const htmlParts: string[] = []
+  let previousLocationName = ''
 
-  lines.forEach((line) => {
+  lines.forEach((line, index) => {
     // Check if line starts with ** (markdown heading)
     if (line.trim().startsWith('**') && line.includes('**', 2)) {
       const headingText = line.replace(/\*\*/g, '').trim()
-      htmlParts.push(`<p style="font-size: 16px; font-weight: 400; margin-bottom: 12px; margin-top: 20px; color: #000; text-align: left;">${headingText}</p>`)
+      htmlParts.push(`<p style="font-size: 16px; font-weight: 600; margin-bottom: 12px; margin-top: 20px; color: #000; line-height: 1.6;">${headingText}</p>`)
     } else if (line.trim().startsWith('-')) {
       // Bullet point
       const bulletText = line.trim().substring(1).trim()
-      htmlParts.push(`<p style="font-size: 16px; font-weight: 300; margin-bottom: 8px; color: #333; text-align: left; padding-left: 0;">${bulletText}</p>`)
+      htmlParts.push(`<p style="font-size: 16px; font-weight: 300; margin-bottom: 8px; color: #333; line-height: 1.6;">${bulletText}</p>`)
     } else if (line.trim() === '') {
       // Empty line for spacing
       htmlParts.push('<div style="height: 12px;"></div>')
+    } else if (line.trim().startsWith('http://') || line.trim().startsWith('https://')) {
+      // URL line - convert previous location name to hyperlink if it exists
+      const url = line.trim()
+      if (previousLocationName) {
+        // Replace the last added item (the location name) with a linked version
+        const lastIndex = htmlParts.length - 1
+        htmlParts[lastIndex] = `<p style="font-size: 16px; font-weight: 300; margin-bottom: 8px; color: #333; line-height: 1.6;"><a href="${url}" style="color: #000; text-decoration: underline;">${previousLocationName}</a></p>`
+        previousLocationName = ''
+      }
+      // Don't add the raw URL as a separate line
     } else {
       // Regular text - check if it has a colon for label:value format
       const colonIndex = line.indexOf(':')
@@ -33,9 +44,11 @@ function formatAdditionalDetailsForEmail(text: string): string {
         // Likely a label:value pair
         const label = line.substring(0, colonIndex + 1)
         const value = line.substring(colonIndex + 1).trim()
-        htmlParts.push(`<p style="font-size: 16px; font-weight: 300; margin-bottom: 8px; color: #333; text-align: left;"><strong>${label}</strong> ${value}</p>`)
+        htmlParts.push(`<p style="font-size: 16px; font-weight: 300; margin-bottom: 8px; color: #333; line-height: 1.6;"><span style="font-weight: 600;">${label}</span> ${value}</p>`)
       } else {
-        htmlParts.push(`<p style="font-size: 16px; font-weight: 300; margin-bottom: 8px; color: #333; text-align: left;">${line}</p>`)
+        // Store this as potential location name for next URL
+        previousLocationName = line.trim()
+        htmlParts.push(`<p style="font-size: 16px; font-weight: 300; margin-bottom: 8px; color: #333; line-height: 1.6;">${line}</p>`)
       }
     }
   })
@@ -104,27 +117,27 @@ export async function POST(request: NextRequest) {
             html: `
             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
               <a href="${process.env.NEXT_PUBLIC_APP_URL}" style="display: flex; align-items: center; margin-bottom: 40px; text-decoration: none;">
-                <img src="${process.env.NEXT_PUBLIC_APP_URL}/logo-email.png" alt="Eat Wild" width="32" height="32" style="display: block; margin-right: 12px;" />
+                <img src="https://eat-wild.vercel.app/logo-email.png" alt="Eat Wild" width="32" height="32" style="display: block; margin-right: 12px;" />
                 <span style="font-size: 20px; font-weight: 300; color: #000;">eat wild</span>
               </a>
 
-              <h1 style="font-size: 24px; font-weight: 400; margin-bottom: 20px; color: #000;">Thank you for booking!</h1>
+              <h1 style="font-size: 24px; font-weight: 600; margin-bottom: 16px; color: #000; line-height: 1.6;">thank you for booking!</h1>
 
-              <p style="font-size: 16px; font-weight: 300; margin-bottom: 8px; color: #333;">Hi ${customerName},</p>
+              <p style="font-size: 16px; font-weight: 300; margin-bottom: 16px; color: #333; line-height: 1.6;">hi ${customerName},</p>
 
-              <p style="font-size: 16px; font-weight: 300; margin-bottom: 20px; color: #333;">Your ticket for <strong>${ticket.event.title}</strong> has been confirmed.</p>
+              <p style="font-size: 16px; font-weight: 300; margin-bottom: 24px; color: #333; line-height: 1.6;">your ticket for <span style="font-weight: 600;">${ticket.event.title}</span> has been confirmed.</p>
 
-              <div style="background: #f5f3ed; padding: 20px; border-radius: 4px; margin-bottom: 20px;">
-                <h2 style="font-size: 18px; font-weight: 400; margin-bottom: 12px; color: #000; text-align: left;">important details for attendees</h2>
-                <p style="font-size: 16px; font-weight: 300; margin-bottom: 8px; color: #333;"><strong>event:</strong> ${ticket.event.title}</p>
-                <p style="font-size: 16px; font-weight: 300; margin-bottom: ${ticket.event.additionalDetails ? '8px' : '0'}; color: #333;"><strong>date:</strong> ${ticket.event.date}</p>
-                ${ticket.event.additionalDetails ? `<div style="line-height: 1.6; margin-top: 20px;">${formatAdditionalDetailsForEmail(ticket.event.additionalDetails)}</div>` : ''}
+              <div style="background: #f5f3ed; padding: 20px; border-radius: 4px; margin-bottom: 24px;">
+                <h2 style="font-size: 18px; font-weight: 600; margin-bottom: 16px; color: #000; line-height: 1.6;">important details for attendees</h2>
+                <p style="font-size: 16px; font-weight: 300; margin-bottom: 8px; color: #333; line-height: 1.6;"><span style="font-weight: 600;">event:</span> ${ticket.event.title}</p>
+                <p style="font-size: 16px; font-weight: 300; margin-bottom: ${ticket.event.additionalDetails ? '8px' : '0'}; color: #333; line-height: 1.6;"><span style="font-weight: 600;">date:</span> ${ticket.event.date}</p>
+                ${ticket.event.additionalDetails ? `<div style="margin-top: 20px;">${formatAdditionalDetailsForEmail(ticket.event.additionalDetails)}</div>` : ''}
               </div>
 
-              <p style="font-size: 16px; font-weight: 300; margin-bottom: 8px; color: #333;">We look forward to seeing you!</p>
+              <p style="font-size: 16px; font-weight: 300; margin-bottom: 16px; color: #333; line-height: 1.6;">we look forward to seeing you!</p>
 
-              <p style="font-size: 16px; font-weight: 300; margin-bottom: 8px; color: #333;">
-                — The Eat Wild Team
+              <p style="font-size: 16px; font-weight: 300; margin-bottom: 0; color: #333; line-height: 1.6;">
+                — the eat wild team
               </p>
             </div>
           `,
