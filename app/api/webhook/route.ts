@@ -19,7 +19,7 @@ function formatAdditionalDetailsForEmail(text: string): string {
     // Check if line starts with ** (markdown heading)
     if (line.trim().startsWith('**') && line.includes('**', 2)) {
       const headingText = line.replace(/\*\*/g, '').trim()
-      htmlParts.push(`<p style="font-size: 16px; font-weight: 600; margin-bottom: 12px; margin-top: 20px; color: #000; line-height: 1.6;">${headingText}</p>`)
+      htmlParts.push(`<p style="font-size: 16px; font-weight: 400; margin-bottom: 12px; margin-top: 20px; color: #000; line-height: 1.6;">${headingText}</p>`)
     } else if (line.trim().startsWith('-')) {
       // Bullet point
       const bulletText = line.trim().substring(1).trim()
@@ -44,7 +44,7 @@ function formatAdditionalDetailsForEmail(text: string): string {
         // Likely a label:value pair
         const label = line.substring(0, colonIndex + 1)
         const value = line.substring(colonIndex + 1).trim()
-        htmlParts.push(`<p style="font-size: 16px; font-weight: 300; margin-bottom: 8px; color: #333; line-height: 1.6;"><span style="font-weight: 600;">${label}</span> ${value}</p>`)
+        htmlParts.push(`<p style="font-size: 16px; font-weight: 300; margin-bottom: 8px; color: #333; line-height: 1.6;"><span style="font-weight: 400;">${label}</span> ${value}</p>`)
       } else {
         // Store this as potential location name for next URL
         previousLocationName = line.trim()
@@ -121,16 +121,16 @@ export async function POST(request: NextRequest) {
                 <span style="font-size: 20px; font-weight: 300; color: #000;">eat wild</span>
               </a>
 
-              <h1 style="font-size: 24px; font-weight: 600; margin-bottom: 16px; color: #000; line-height: 1.6;">thank you for booking!</h1>
+              <h1 style="font-size: 24px; font-weight: 400; margin-bottom: 16px; color: #000; line-height: 1.6;">thank you for booking!</h1>
 
               <p style="font-size: 16px; font-weight: 300; margin-bottom: 16px; color: #333; line-height: 1.6;">hi ${customerName},</p>
 
-              <p style="font-size: 16px; font-weight: 300; margin-bottom: 24px; color: #333; line-height: 1.6;">your ticket for <span style="font-weight: 600;">${ticket.event.title}</span> has been confirmed.</p>
+              <p style="font-size: 16px; font-weight: 300; margin-bottom: 24px; color: #333; line-height: 1.6;">your ticket for <span style="font-weight: 400;">${ticket.event.title}</span> has been confirmed.</p>
 
               <div style="background: #f5f3ed; padding: 20px; border-radius: 4px; margin-bottom: 24px;">
-                <h2 style="font-size: 18px; font-weight: 600; margin-bottom: 16px; color: #000; line-height: 1.6;">important details for attendees</h2>
-                <p style="font-size: 16px; font-weight: 300; margin-bottom: 8px; color: #333; line-height: 1.6;"><span style="font-weight: 600;">event:</span> ${ticket.event.title}</p>
-                <p style="font-size: 16px; font-weight: 300; margin-bottom: ${ticket.event.additionalDetails ? '8px' : '0'}; color: #333; line-height: 1.6;"><span style="font-weight: 600;">date:</span> ${ticket.event.date}</p>
+                <h2 style="font-size: 18px; font-weight: 400; margin-bottom: 16px; color: #000; line-height: 1.6;">important details for attendees</h2>
+                <p style="font-size: 16px; font-weight: 300; margin-bottom: 8px; color: #333; line-height: 1.6;"><span style="font-weight: 400;">event:</span> ${ticket.event.title}</p>
+                <p style="font-size: 16px; font-weight: 300; margin-bottom: ${ticket.event.additionalDetails ? '8px' : '0'}; color: #333; line-height: 1.6;"><span style="font-weight: 400;">date:</span> ${ticket.event.date}</p>
                 ${ticket.event.additionalDetails ? `<div style="margin-top: 20px;">${formatAdditionalDetailsForEmail(ticket.event.additionalDetails)}</div>` : ''}
               </div>
 
