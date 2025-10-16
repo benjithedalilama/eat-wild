@@ -9,16 +9,17 @@ datasource db {
 }
 
 model Event {
-  id          String   @id @default(cuid())
-  title       String
-  description String
-  date        String
-  location    String
-  price       Int      // Price in dollars
-  maxCapacity Int      // Maximum number of tickets
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  tickets     Ticket[]
+  id                String   @id @default(cuid())
+  title             String
+  description       String
+  date              String
+  location          String
+  price             Int      // Price in dollars
+  maxCapacity       Int      // Maximum number of tickets
+  additionalDetails String?  // Post-purchase details shown only to ticket holders
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  tickets           Ticket[]
 }
 
 model Ticket {

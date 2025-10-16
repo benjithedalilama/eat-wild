@@ -9,6 +9,32 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
+function formatAdditionalDetailsForEmail(text: string): string {
+  // Convert to lowercase and split into lines
+  const lines = text.toLowerCase().split('\n')
+  const htmlParts: string[] = []
+
+  lines.forEach((line) => {
+    // Check if line starts with ** (markdown heading)
+    if (line.trim().startsWith('**') && line.includes('**', 2)) {
+      const headingText = line.replace(/\*\*/g, '').trim()
+      htmlParts.push(`<p style="font-size: 16px; font-weight: 400; margin-bottom: 8px; margin-top: 16px; color: #000; text-align: left;">${headingText}</p>`)
+    } else if (line.trim().startsWith('-')) {
+      // Bullet point
+      const bulletText = line.trim().substring(1).trim()
+      htmlParts.push(`<p style="font-size: 16px; font-weight: 300; margin-bottom: 4px; color: #333; text-align: left;">${bulletText}</p>`)
+    } else if (line.trim() === '') {
+      // Empty line for spacing
+      htmlParts.push('<div style="height: 8px;"></div>')
+    } else {
+      // Regular text
+      htmlParts.push(`<p style="font-size: 16px; font-weight: 300; margin-bottom: 4px; color: #333; text-align: left;">${line}</p>`)
+    }
+  })
+
+  return htmlParts.join('')
+}
+
 export async function POST(request: NextRequest) {
   const body = await request.text()
   const signature = request.headers.get('stripe-signature')
@@ -87,6 +113,13 @@ export async function POST(request: NextRequest) {
                 <p style="font-size: 16px; font-weight: 300; margin-bottom: 8px; color: #333;"><strong>Location:</strong> ${ticket.event.location}</p>
                 <p style="font-size: 16px; font-weight: 300; margin-bottom: 0; color: #333;"><strong>Description:</strong> ${ticket.event.description}</p>
               </div>
+
+              ${ticket.event.additionalDetails ? `
+              <div style="background: #f5f3ed; padding-top: 20px; padding-bottom: 20px; border-radius: 4px; margin-bottom: 20px;">
+                <h2 style="font-size: 18px; font-weight: 400; margin-bottom: 12px; color: #000; text-align: left;">important details for attendees</h2>
+                <div style="line-height: 1.6;">${formatAdditionalDetailsForEmail(ticket.event.additionalDetails)}</div>
+              </div>
+              ` : ''}
 
               <p style="font-size: 16px; font-weight: 300; margin-bottom: 20px; color: #333;">
                 <a href="${process.env.NEXT_PUBLIC_APP_URL}/events/${eventId}" style="color: #000; text-decoration: underline;">View event details</a>

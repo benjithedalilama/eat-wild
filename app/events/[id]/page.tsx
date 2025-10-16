@@ -15,6 +15,7 @@ type Event = {
   maxCapacity: number
   ticketsSold: number
   ticketsAvailable: number
+  additionalDetails?: string | null
 }
 
 export default function EventPage() {
@@ -156,6 +157,9 @@ export default function EventPage() {
                       sold out
                     </p>
                   )}
+                  <p style={{ fontSize: '14px', fontWeight: 300, color: '#666', marginTop: '16px' }}>
+                    additional details including exact meeting location and what to bring will be sent in your confirmation email
+                  </p>
                 </div>
               </div>
 
