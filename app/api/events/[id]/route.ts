@@ -25,6 +25,10 @@ export async function GET(
       ...event,
       ticketsSold,
       ticketsAvailable,
+    }, {
+      headers: {
+        'Cache-Control': 'no-store, max-age=0',
+      },
     })
   } catch (error) {
     console.error('Error fetching event:', error)
