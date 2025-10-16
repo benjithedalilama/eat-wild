@@ -64,7 +64,7 @@ export async function POST(request: NextRequest) {
       if (process.env.RESEND_API_KEY) {
         try {
           const emailResult = await resend.emails.send({
-            from: 'Eat Wild <onboarding@resend.dev>',
+            from: 'Eat Wild <events@benimadali.com>',
             to: customerEmail,
             subject: `Your ticket for ${ticket.event.title}`,
             html: `
