@@ -2,8 +2,6 @@ import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
 import { prisma } from '@/lib/prisma'
 import { Resend } from 'resend'
-import { readFileSync } from 'fs'
-import { join } from 'path'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2025-09-30.clover',
@@ -65,10 +63,6 @@ export async function POST(request: NextRequest) {
       // Send confirmation email
       if (process.env.RESEND_API_KEY) {
         try {
-          // Read and encode the logo as base64 for inline attachment (PNG for email compatibility)
-          const logoPath = join(process.cwd(), 'public', 'logo-email.png')
-          const logoContent = readFileSync(logoPath).toString('base64')
-
           const emailResult = await resend.emails.send({
             from: 'Eat Wild <events@benimadali.com>',
             to: customerEmail,
@@ -76,7 +70,7 @@ export async function POST(request: NextRequest) {
             html: `
             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
               <div style="margin-bottom: 40px;">
-                <img src="cid:logo" alt="Eat Wild" width="80" height="80" style="display: block;" />
+                <img src="${process.env.NEXT_PUBLIC_APP_URL}/logo-email.png" alt="Eat Wild" width="80" height="80" style="display: block;" />
               </div>
 
               <h1 style="font-size: 24px; font-weight: 400; margin-bottom: 20px; color: #000;">Thank you for booking!</h1>
@@ -104,13 +98,6 @@ export async function POST(request: NextRequest) {
               </p>
             </div>
           `,
-            attachments: [
-              {
-                filename: 'logo.png',
-                content: logoContent,
-                content_id: 'logo',
-              } as any,
-            ],
           })
           console.log('Email sent successfully:', emailResult)
         } catch (emailError) {
