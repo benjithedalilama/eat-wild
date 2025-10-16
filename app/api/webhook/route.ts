@@ -117,9 +117,7 @@ export async function POST(request: NextRequest) {
               <div style="background: #f5f3ed; padding: 20px; border-radius: 4px; margin-bottom: 20px;">
                 <h2 style="font-size: 18px; font-weight: 400; margin-bottom: 12px; color: #000; text-align: left;">important details for attendees</h2>
                 <p style="font-size: 16px; font-weight: 300; margin-bottom: 8px; color: #333;"><strong>event:</strong> ${ticket.event.title}</p>
-                <p style="font-size: 16px; font-weight: 300; margin-bottom: 8px; color: #333;"><strong>date:</strong> ${ticket.event.date}</p>
-                <p style="font-size: 16px; font-weight: 300; margin-bottom: 8px; color: #333;"><strong>location:</strong> ${ticket.event.location}</p>
-                <p style="font-size: 16px; font-weight: 300; margin-bottom: ${ticket.event.additionalDetails ? '8px' : '0'}; color: #333;"><strong>description:</strong> ${ticket.event.description}</p>
+                <p style="font-size: 16px; font-weight: 300; margin-bottom: ${ticket.event.additionalDetails ? '8px' : '0'}; color: #333;"><strong>date:</strong> ${ticket.event.date}</p>
                 ${ticket.event.additionalDetails ? `<div style="line-height: 1.6; margin-top: 20px;">${formatAdditionalDetailsForEmail(ticket.event.additionalDetails)}</div>` : ''}
               </div>
 
