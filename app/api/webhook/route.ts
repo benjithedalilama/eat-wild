@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
 import { prisma } from '@/lib/prisma'
 import { Resend } from 'resend'
+import { readFileSync } from 'fs'
+import { join } from 'path'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2025-09-30.clover',
@@ -63,6 +65,10 @@ export async function POST(request: NextRequest) {
       // Send confirmation email
       if (process.env.RESEND_API_KEY) {
         try {
+          // Read and encode the logo as base64 for inline attachment
+          const logoPath = join(process.cwd(), 'public', 'favicon.svg')
+          const logoContent = readFileSync(logoPath).toString('base64')
+
           const emailResult = await resend.emails.send({
             from: 'Eat Wild <events@benimadali.com>',
             to: customerEmail,
@@ -70,7 +76,7 @@ export async function POST(request: NextRequest) {
             html: `
             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
               <div style="text-align: center; margin-bottom: 40px;">
-                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHN0eWxlPi5waXhlbHtzaGFwZS1yZW5kZXJpbmc6Y3Jpc3BFZGdlc308L3N0eWxlPjxyZWN0IHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgZmlsbD0idHJhbnNwYXJlbnQiLz48cmVjdCB4PSIxMiIgeT0iMTIiIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIGZpbGw9IiM4QjQ3ODkiIGNsYXNzPSJwaXhlbCIvPjxyZWN0IHg9IjEwIiB5PSIxMCIgd2lkdGg9IjIiIGhlaWdodD0iMiIgZmlsbD0iI0E4NTVBOCIgY2xhc3M9InBpeGVsIi8+PHJlY3QgeD0iMjAiIHk9IjEwIiB3aWR0aD0iMiIgaGVpZ2h0PSIyIiBmaWxsPSIjQTg1NUE4IiBjbGFzcz0icGl4ZWwiLz48cmVjdCB4PSIxMCIgeT0iMjAiIHdpZHRoPSIyIiBoZWlnaHQ9IjIiIGZpbGw9IiNBODU1QTgiIGNsYXNzPSJwaXhlbCIvPjxyZWN0IHg9IjIwIiB5PSIyMCIgd2lkdGg9IjIiIGhlaWdodD0iMiIgZmlsbD0iI0E4NTVBOCIgY2xhc3M9InBpeGVsIi8+PHJlY3QgeD0iMTQiIHk9IjYiIHdpZHRoPSI0IiBoZWlnaHQ9IjIiIGZpbGw9IiNCNTY1QjUiIGNsYXNzPSJwaXhlbCIvPjxyZWN0IHg9IjE1IiB5PSI0IiB3aWR0aD0iMiIgaGVpZ2h0PSIyIiBmaWxsPSIjQzQ4NUM0IiBjbGFzcz0icGl4ZWwiLz48cmVjdCB4PSIxNSIgeT0iMiIgd2lkdGg9IjIiIGhlaWdodD0iMiIgZmlsbD0iI0Q0QTVENCIgY2xhc3M9InBpeGVsIi8+PHJlY3QgeD0iMTQiIHk9IjI0IiB3aWR0aD0iNCIgaGVpZ2h0PSIyIiBmaWxsPSIjQjU2NUI1IiBjbGFzcz0icGl4ZWwiLz48cmVjdCB4PSIxNSIgeT0iMjYiIHdpZHRoPSIyIiBoZWlnaHQ9IjIiIGZpbGw9IiNDNDg1QzQiIGNsYXNzPSJwaXhlbCIvPjxyZWN0IHg9IjE1IiB5PSIyOCIgd2lkdGg9IjIiIGhlaWdodD0iMiIgZmlsbD0iI0Q0QTVENCIgY2xhc3M9InBpeGVsIi8+PHJlY3QgeD0iNiIgeT0iMTQiIHdpZHRoPSIyIiBoZWlnaHQ9IjQiIGZpbGw9IiNCNTY1QjUiIGNsYXNzPSJwaXhlbCIvPjxyZWN0IHg9IjQiIHk9IjE1IiB3aWR0aD0iMiIgaGVpZ2h0PSIyIiBmaWxsPSIjQzQ4NUM0IiBjbGFzcz0icGl4ZWwiLz48cmVjdCB4PSIyIiB5PSIxNSIgd2lkdGg9IjIiIGhlaWdodD0iMiIgZmlsbD0iI0Q0QTVENCIgY2xhc3M9InBpeGVsIi8+PHJlY3QgeD0iMjQiIHk9IjE0IiB3aWR0aD0iMiIgaGVpZ2h0PSI0IiBmaWxsPSIjQjU2NUI1IiBjbGFzcz0icGl4ZWwiLz48cmVjdCB4PSIyNiIgeT0iMTUiIHdpZHRoPSIyIiBoZWlnaHQ9IjIiIGZpbGw9IiNDNDg1QzQiIGNsYXNzPSJwaXhlbCIvPjxyZWN0IHg9IjI4IiB5PSIxNSIgd2lkdGg9IjIiIGhlaWdodD0iMiIgZmlsbD0iI0Q0QTVENCIgY2xhc3M9InBpeGVsIi8+PHJlY3QgeD0iMjIiIHk9IjgiIHdpZHRoPSIyIiBoZWlnaHQ9IjIiIGZpbGw9IiNCNTY1QjUiIGNsYXNzPSJwaXhlbCIvPjxyZWN0IHg9IjI0IiB5PSI2IiB3aWR0aD0iMiIgaGVpZ2h0PSIyIiBmaWxsPSIjQzQ4NUM0IiBjbGFzcz0icGl4ZWwiLz48cmVjdCB4PSIyNiIgeT0iNCIgd2lkdGg9IjIiIGhlaWdodD0iMiIgZmlsbD0iI0Q0QTVENCIgY2xhc3M9InBpeGVsIi8+PHJlY3QgeD0iOCIgeT0iOCIgd2lkdGg9IjIiIGhlaWdodD0iMiIgZmlsbD0iI0I1NjVCNSIgY2xhc3M9InBpeGVsIi8+PHJlY3QgeD0iNiIgeT0iNiIgd2lkdGg9IjIiIGhlaWdodD0iMiIgZmlsbD0iI0M0ODVDNCIgY2xhc3M9InBpeGVsIi8+PHJlY3QgeD0iNCIgeT0iNCIgd2lkdGg9IjIiIGhlaWdodD0iMiIgZmlsbD0iI0Q0QTVENCIgY2xhc3M9InBpeGVsIi8+PHJlY3QgeD0iMjIiIHk9IjIyIiB3aWR0aD0iMiIgaGVpZ2h0PSIyIiBmaWxsPSIjQjU2NUI1IiBjbGFzcz0icGl4ZWwiLz48cmVjdCB4PSIyNCIgeT0iMjQiIHdpZHRoPSIyIiBoZWlnaHQ9IjIiIGZpbGw9IiNDNDg1QzQiIGNsYXNzPSJwaXhlbCIvPjxyZWN0IHg9IjI2IiB5PSIyNiIgd2lkdGg9IjIiIGhlaWdodD0iMiIgZmlsbD0iI0Q0QTVENCIgY2xhc3M9InBpeGVsIi8+PHJlY3QgeD0iOCIgeT0iMjIiIHdpZHRoPSIyIiBoZWlnaHQ9IjIiIGZpbGw9IiNCNTY1QjUiIGNsYXNzPSJwaXhlbCIvPjxyZWN0IHg9IjYiIHk9IjI0IiB3aWR0aD0iMiIgaGVpZ2h0PSIyIiBmaWxsPSIjQzQ4NUM0IiBjbGFzcz0icGl4ZWwiLz48cmVjdCB4PSI0IiB5PSIyNiIgd2lkdGg9IjIiIGhlaWdodD0iMiIgZmlsbD0iI0Q0QTVENCIgY2xhc3M9InBpeGVsIi8+PHJlY3QgeD0iMTQiIHk9IjE0IiB3aWR0aD0iMiIgaGVpZ2h0PSIyIiBmaWxsPSIjNkIzNjY5IiBjbGFzcz0icGl4ZWwiLz48cmVjdCB4PSIxNiIgeT0iMTYiIHdpZHRoPSIyIiBoZWlnaHQ9IjIiIGZpbGw9IiM2QjM2NjkiIGNsYXNzPSJwaXhlbCIvPjwvc3ZnPg==" alt="Eat Wild" width="80" height="80" style="display: block; margin: 0 auto;" />
+                <img src="cid:logo" alt="Eat Wild" width="80" height="80" style="display: block; margin: 0 auto;" />
               </div>
 
               <h1 style="font-size: 24px; font-weight: 400; margin-bottom: 20px; color: #000;">Thank you for booking!</h1>
@@ -98,6 +104,13 @@ export async function POST(request: NextRequest) {
               </p>
             </div>
           `,
+            attachments: [
+              {
+                filename: 'logo.svg',
+                content: logoContent,
+                content_id: 'logo',
+              },
+            ],
           })
           console.log('Email sent successfully:', emailResult)
         } catch (emailError) {
