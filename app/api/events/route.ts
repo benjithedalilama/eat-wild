@@ -5,6 +5,9 @@ import { prisma } from '@/lib/prisma'
 export async function GET() {
   try {
     const events = await prisma.event.findMany({
+      where: {
+        archived: false,
+      },
       include: {
         tickets: true,
       },

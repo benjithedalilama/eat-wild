@@ -17,6 +17,7 @@ model Event {
   price             Int      // Price in dollars
   maxCapacity       Int      // Maximum number of tickets
   additionalDetails String?  // Post-purchase details shown only to ticket holders
+  archived          Boolean  @default(false) // Hide from public listings but keep data
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
   tickets           Ticket[]
