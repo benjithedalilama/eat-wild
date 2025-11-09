@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 
+// Fetch all events with ticket availability
 export async function GET() {
   try {
     const events = await prisma.event.findMany({
